@@ -1,0 +1,16 @@
+<% if (messages.error) { %>
+    <script class="text-red-500" role="alert">
+        swal({
+          text: '<%= messages.error %>',          
+          button: 'Kembali'
+        })
+    </script>
+  <% } %>
+<% if (messages.success) { %>
+  <script class="text-green-500" role="alert">
+    swal({
+      text: '<%= messages.success %>',          
+      button: 'Lanjut'
+    })
+  </script>
+<% } %>
