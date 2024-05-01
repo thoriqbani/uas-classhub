@@ -5,15 +5,15 @@ const router = express.Router();
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
-  res.render('home');
+  res.render('index');
 });
 
 router.get('/login', function(req, res, next) {
-  res.render('login');
+  res.render('auth/login');
 });
 
 router.get('/register', function(req, res, next) {
-  res.render('register');
+  res.render('auth/register');
 });
 
 router.post('/register', async function(req, res) {
@@ -39,8 +39,6 @@ router.post('/register', async function(req, res) {
       nama,
       jenis_kelamin,
       tanggal_lahir,
-      nama_orangtua,
-      pekerjaan_orangtua,
       no_hp,
       photos: req.file.filename,
       email,

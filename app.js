@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const session = require('express-session');
-const MemoryStore = require('memorystore')(session);
+const MemoryStore = require('session-memory-store')(session);
 
 var indexRouter = require('./routes/index');
 var siswaRouter = require('./routes/siswa');
@@ -32,7 +32,7 @@ app.use(session({
     max: 1000000
   }),
   saveUninitialized: true,
-  resave: true,
+  resave: false,
   secret: 'secret'
 }));
 
