@@ -1,11 +1,20 @@
 <% if (messages.error) { %>
-    <script class="text-red-500" role="alert">
-        swal({
-          text: '<%= messages.error %>',          
-          button: 'Kembali'
-        })
-    </script>
-  <% } %>
+  <script class="text-red-500" role="alert">
+    swal({
+      text: '<%= messages.error %>',          
+      button: 'Kembali'
+    })
+  </script>
+<% } %>
+<% if (messages.messageError) { %>
+  <script class="text-danger" role="alert">
+    swal({
+      text: '<%= messages.messageError %>',          
+      button: 'Kembali'
+    })
+    // alert('<%= messages.messageError %>')
+  </script>
+<% } %>
 <% if (messages.success) { %>
   <script class="text-green-500" role="alert">
     swal({
