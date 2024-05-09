@@ -1,0 +1,11 @@
+<%- include('../partials/header.ejs') %>
+    <%- include('../partials/message') %>
+    <p><%= nama %></p>
+    <img src="/images/foto_user/<%= photos %>" alt="">
+    <form action="/siswa/presensi" method="post">
+        
+        <input type="hidden" name="mapel_id">
+        <button type="submit">Presensi</button>
+    </form>
+    <a href="/siswa">Beranda</a>
+<%- include('../partials/footer.ejs') %>

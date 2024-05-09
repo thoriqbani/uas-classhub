@@ -1,0 +1,13 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/message') %>
+    <p><%= nama %></p>
+    <img src="/images/foto_user/<%= photos %>" alt="">
+    <% for(var i=0; i<dataSenin.length; i++) { %>
+        <a href="/siswa/detail/<%= dataSenin[i].mapel_id %>">
+            <h1><%= dataSenin[i].nama_mapel %></h1>
+            <h4><%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></h4>
+        </a>
+    <% } %>
+    <a href="/siswa/presensi">presensi</a>
+    <a href="/logout">Logout</a>
+<%- include('../partials/footer') %>

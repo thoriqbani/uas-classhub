@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/message') %>
+    <form action="/siswa/presensi/presensi" method="post">
+        <% if(jamSekarang<dataMapel[0].jam_awal || jamSekarang>dataMapel[0].jam_akhir) { %>
+            <button type="submit" disabled>Presensi</button>
+        <% } else { %>
+            <input hidden name="mapel_id" value="<%= dataMapel[0].mapel_id %>">
+            <button type="submit">Presensi</button>
+        <% } %>
+    </form>
+<%- include('../partials/footer') %>

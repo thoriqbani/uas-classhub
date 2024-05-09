@@ -38,9 +38,21 @@ class siswa_model {
         })
     }
 
-    static async getID(id){
+    static async getByID(id){
         return new Promise((resolve, reject) => {
             connect.query('select * from user where id = ?', id, function(err, rows){
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    }
+
+    static async getByEmail(email){
+        return new Promise((resolve, reject) => {
+            connect.query('select * from user where email = ?', email, function(err, rows){
                 if(err){
                     reject(err)
                 } else {

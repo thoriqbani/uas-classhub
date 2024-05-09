@@ -9,6 +9,7 @@ const MemoryStore = require('session-memory-store')(session);
 
 var indexRouter = require('./routes/index');
 var siswaRouter = require('./routes/siswa');
+var presensiRouter = require('./routes/presensi');
 
 var app = express();
 
@@ -41,6 +42,7 @@ app.use(flash())
 
 app.use('/', indexRouter)
 app.use('/siswa', siswaRouter)
+app.use('/siswa/presensi', presensiRouter)
 
 app.use(function(req, res, next) {
   next(createError(404))
