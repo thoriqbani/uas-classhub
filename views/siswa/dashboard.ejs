@@ -1,14 +1,89 @@
 <%- include('../partials/header') %>
 <%- include('../partials/navbar') %>
-    <%- include('../partials/message') %>
-    <p><%= nama %></p>
-    <img src="/images/foto_user/<%= photos %>" alt="">
+<%- include('../partials/message') %>
+
+<style>
+
+
+    .profile {
+    display: flex;
+    justify-content: center; /* Mengatur profil ke posisi tengah secara horizontal */
+    align-items: center; /* Mengatur profil ke posisi tengah secara vertikal */
+    margin-bottom: 20px; /* Jarak bawah antara profil dan card jadwal */
+}
+.profile-info img {
+    border-radius: 50%; /* Membuat gambar bundar */
+    width: 150px; /* Menyesuaikan ukuran gambar */
+    height: 150px;
+}
+.profile-info h2 {
+    text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
+}
+.schedule {
+    display: flex; /* Menggunakan Flexbox */
+    flex-wrap: wrap; /* Mengatur agar card-wrap ke baris baru jika tidak cukup ruang */
+    justify-content: center; /* Mengatur agar card-center di pusat secara horizontal */
+}
+
+.card {
+    background-color: #ff4eff; /* Warna ungu */
+    text-align: center;
+    width: 400px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-content {
+    padding: 30px;
+}
+
+.card h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #ffffff;
+}
+.card h4 {
+    margin: 0;
+    font-size: 20px;
+    color: #fbff00;
+}
+.card p {
+    margin: 5px 0;
+    color: #000000;
+}
+.profile-info h6{
+    text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
+}
+
+</style>
+<!-- Profil -->
+<div class="profile">
+    <div class="profile-info">
+        <img src="/images/foto_user/<%= photos %>" alt="Foto Profil">
+        <h2><%= nama %></h2>
+        <h6>Siswa</h6>
+       
+    </div>
+</div>
+
+<!-- Card Jadwal -->
+<div class="schedule">
     <% for(var i=0; i<dataSenin.length; i++) { %>
-        <a href="/siswa/detail/<%= dataSenin[i].mapel_id %>">
-            <h1><%= dataSenin[i].nama_mapel %></h1>
-            <h4><%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></h4>
-        </a>
+        <div class="card">
+            <a href="/siswa/detail/<%= dataSenin[i].mapel_id %>">
+                <div class="card-content">
+                    <h3><%= dataSenin[i].nama_mapel %></h3>
+                    <h4><%= dataSenin[i]-nama %></h4>
+                    <p><%= dataSenin[i].hari %> ,<%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></p>
+                </div>
+            </a>
+        </div>
     <% } %>
-    <a href="/siswa/presensi">presensi</a>
-    <a href="/logout">Logout</a>
+</div>
+
+
+
+
 <%- include('../partials/footer') %>
