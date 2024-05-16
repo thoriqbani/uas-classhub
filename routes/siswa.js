@@ -3,6 +3,11 @@ var router = express.Router();
 const siswa_model = require('../models/siswa_model');
 const jadwal_model = require('../models/jadwal_model');
 
+function getDayName(day) {
+  const hari = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+  return hari[day];
+}
+
 router.get('/', async function(req, res, next) {
   let id = req.session.userId
   try {
@@ -44,15 +49,21 @@ router.get('/detail/(:mapelID)', async function(req, res, next) {
   try {
     let data_user = await siswa_model.getByID(id)
     let data_mapel = await jadwal_model.getByID(mapelID)
+    console.log(data_mapel)
     let today = new Date();
-    const waktu = today.getHours() + ':' + today.getMinutes();
-
+    let hours = today.getHours();
+    let minutes = today.getMinutes();
+    const waktu = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+    console.log(waktu)
+    let hariini = getDayName(today.getDay())
+    console.log(hariini)
     if (data_user.length > 0) {
       if (data_user[0].level_user != 'siswa') {
         res.redirect('/logout')
       } else {
         res.render('siswa/detail', {
           dataMapel: data_mapel,
+          hariIni: hariini,
           jamSekarang: waktu,
           nama: data_user[0].nama,
           photos: data_user[0].photos

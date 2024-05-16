@@ -53,7 +53,7 @@ router.post('/presensi', async function(req, res) {
 
       if (save) {
         req.flash('success', 'Anda berhasil absen !!');
-        res.redirect('/siswa');
+        res.redirect('/siswa/detail/(:"mapel_id")');
       } else {
         req.flash('error', 'Anda gagal absen !!');
         res.redirect('/siswa');

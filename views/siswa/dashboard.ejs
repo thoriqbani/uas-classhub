@@ -75,8 +75,78 @@
             <a href="/siswa/detail/<%= dataSenin[i].mapel_id %>">
                 <div class="card-content">
                     <h3><%= dataSenin[i].nama_mapel %></h3>
-                    <h4><%= dataSenin[i]-nama %></h4>
+                    <h4><%= dataSenin[i].nama %></h4>
                     <p><%= dataSenin[i].hari %> ,<%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></p>
+                </div>
+            </a>
+        </div>
+    <% } %>
+</div>
+<!-- Card Jadwal -->
+<div class="schedule">
+    <% for(var i=0; i<dataSelasa.length; i++) { %>
+        <div class="card">
+            <a href="/siswa/detail/<%= dataSelasa[i].mapel_id %>">
+                <div class="card-content">
+                    <h3><%= dataSelasa[i].nama_mapel %></h3>
+                    <h4><%= dataSelasa[i].nama %></h4>
+                    <p><%= dataSelasa[i].hari %> ,<%= dataSelasa[i].jam_awal %> - <%= dataSelasa[i].jam_akhir %></p>
+                </div>
+            </a>
+        </div>
+    <% } %>
+</div>
+<!-- Card Jadwal -->
+<div class="schedule">
+    <% for(var i=0; i<dataRabu.length; i++) { %>
+        <div class="card">
+            <a href="/siswa/detail/<%= dataRabu[i].mapel_id %>">
+                <div class="card-content">
+                    <h3><%= dataRabu[i].nama_mapel %></h3>
+                    <h4><%= dataRabu[i].nama %></h4>
+                    <p><%= dataRabu[i].hari %> ,<%= dataRabu[i].jam_awal %> - <%= dataRabu[i].jam_akhir %></p>
+                </div>
+            </a>
+        </div>
+    <% } %>
+</div>
+<!-- Card Jadwal -->
+<div class="schedule">
+    <% for(var i=0; i<dataKamis.length; i++) { %>
+        <div class="card">
+            <a href="/siswa/detail/<%= dataKamis[i].mapel_id %>">
+                <div class="card-content">
+                    <h3><%= dataKamis[i].nama_mapel %></h3>
+                    <h4><%= dataKamis[i].nama %></h4>
+                    <p><%= dataKamis[i].hari %> ,<%= dataKamis[i].jam_awal %> - <%= dataKamis[i].jam_akhir %></p>
+                </div>
+            </a>
+        </div>
+    <% } %>
+</div>
+<!-- Card Jadwal -->
+<div class="schedule">
+    <% for(var i=0; i<dataJumat.length; i++) { %>
+        <div class="card">
+            <a href="/siswa/detail/<%= dataJumat[i].mapel_id %>">
+                <div class="card-content">
+                    <h3><%= dataJumat[i].nama_mapel %></h3>
+                    <h4><%= dataJumat[i].nama %></h4>
+                    <p><%= dataJumat[i].hari %> ,<%= dataJumat[i].jam_awal %> - <%= dataJumat[i].jam_akhir %></p>
+                </div>
+            </a>
+        </div>
+    <% } %>
+</div>
+<!-- Card Jadwal -->
+<div class="schedule">
+    <% for(var i=0; i<dataSabtu.length; i++) { %>
+        <div class="card">
+            <a href="/siswa/detail/<%= dataSabtu[i].mapel_id %>">
+                <div class="card-content">
+                    <h3><%= dataSabtu[i].nama_mapel %></h3>
+                    <h4><%= dataSabtu[i].nama %></h4>
+                    <p><%= dataSabtu[i].hari %> ,<%= dataSabtu[i].jam_awal %> - <%= dataSabtu[i].jam_akhir %></p>
                 </div>
             </a>
         </div>
