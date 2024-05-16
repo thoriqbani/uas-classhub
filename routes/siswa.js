@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const siswa_model = require('../models/siswa_model');
 const jadwal_model = require('../models/jadwal_model');
+const presensi_model = require('../models/presensi_model');
 
 function getDayName(day) {
   const hari = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
@@ -24,6 +25,7 @@ router.get('/', async function(req, res, next) {
         res.redirect('/logout')
       } else {
         res.render('siswa/dashboard', {
+          pages: 'Dashboard',
           dataSenin: data_harisenin,
           dataSelasa: data_hariselasa,
           dataRabu: data_harirabu,
@@ -50,6 +52,7 @@ router.get('/detail/(:mapelID)', async function(req, res, next) {
   try {
     let data_user = await siswa_model.getByID(id)
     let data_mapel = await jadwal_model.getByID(mapelID)
+    let dataPresensi = await presensi_model.getPresensi(id)
     console.log(data_mapel)
     let today = new Date();
     let hours = today.getHours();
@@ -63,6 +66,8 @@ router.get('/detail/(:mapelID)', async function(req, res, next) {
         res.redirect('/logout')
       } else {
         res.render('siswa/detail', {
+          pages: 'Detail',
+          dataPresensi: dataPresensi,
           dataMapel: data_mapel,
           hariIni: hariini,
           jamSekarang: waktu,

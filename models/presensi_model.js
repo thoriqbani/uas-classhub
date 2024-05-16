@@ -13,6 +13,18 @@ class presensi_model {
         })
     }
 
+    static async getAllPresensi(user_id){
+        return new Promise((resolve, reject) => {
+            connect.query('select * from presensi where user_id = ? ',  user_id, (err, rows) => {
+                if(err){
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
+    }
+
     static async Store(Data){
         return new Promise((resolve, reject) =>{
             connect.query('insert into presensi set ? ', Data, function(err, result){

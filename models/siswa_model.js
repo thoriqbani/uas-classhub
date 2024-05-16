@@ -64,7 +64,7 @@ class siswa_model {
 
     static async Update(id, Data){
         return new Promise((resolve, reject) => {
-        connect.query('update user set ? where id_user = '+ id, Data, function(err, result){
+        connect.query('update user set ? where id = ?', [Data, id], function(err, result){
             if(err){
                 reject(err)
             } else {

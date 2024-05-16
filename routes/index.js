@@ -41,7 +41,6 @@ router.post('/register', upload.single("photos"), async function(req, res) {
   try {
     let today = new Date();
     let birthDate = new Date(tanggal_lahir);
-    const hariini = today.getDay()
     let age = today.getFullYear() - birthDate.getFullYear();
     let monthDiff = today.getMonth() - birthDate.getMonth();
     if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {

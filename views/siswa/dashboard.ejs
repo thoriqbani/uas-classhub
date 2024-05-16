@@ -43,18 +43,18 @@
         margin: 0;
         font-size: 20px;
         color: #ffffff;
-        background-color: rgb(110, 99, 255); /* Warna biru untuk latar belakang judul */
-        padding: 10px; /* Padding untuk memberikan ruang di sekitar teks */
-        border-radius: 10px 10px 10px 10px ; /* Membulatkan sudut atas */
+        background-color: #6b7991; 
+        padding: 10px;
+        border-radius: 10px 10px 10px 10px ;
     }
     .card h4 {
         margin: 0;
-        font-size: 18px;
-        color: #fbff00;
+        font-size: 20px;
+        color: white;
     }
     .card p {
         margin: 5px 0;
-        color: #000000;
+        color: #41454a;
     }
     .profile-info h6 {
         text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
@@ -63,18 +63,16 @@
         text-decoration: none; /* Menghilangkan garis bawah pada tautan */
         color: inherit; /* Menggunakan warna teks yang ada */
     }
+    .warna-putih {
+        color: white;
+    }
+    .warna-abu {
+        background-color: #a3adba;
+    }
 </style>
 
-<!-- Profil -->
-<!-- 
-<div class="profile">
-    <div class="profile-info">
-        <img src="/images/foto_user/<%= photos %>" alt="Foto Profil">
-        <h2><%= nama %></h2>
-        <h6>Siswa</h6>
-    </div>
-</div> 
--->
+<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+    <!-- Navbar -->
 
 <!-- Schedule Cards -->
 <div class="schedule">
@@ -83,7 +81,7 @@
         <div class="card-content">
             <h3>Senin</h3><br>
             <% for(var i = 0; i < dataSenin.length; i++) { %>
-                <a href="/siswa/detail/<%= dataSenin[i].id_mapel %>">
+                <a href="/siswa/detail/<%= dataSenin[i].mapel_id %>">
                     <h4><%= dataSenin[i].nama_mapel %></h4>
                     <p><%= dataSenin[i].nama %></p>
                     <p><%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></p><br>
@@ -97,7 +95,7 @@
         <div class="card-content">
             <h3>Selasa</h3><br>
             <% for(var i = 0; i < dataSelasa.length; i++) { %>
-                <a href="/siswa/detail/<%= dataSelasa[i].id_mapel %>">
+                <a href="/siswa/detail/<%= dataSelasa[i].mapel_id %>">
                     <h4><%= dataSelasa[i].nama_mapel %></h4>
                     <p><%= dataSelasa[i].nama %></p>
                     <p><%= dataSelasa[i].jam_awal %> - <%= dataSelasa[i].jam_akhir %></p><br>
@@ -111,7 +109,7 @@
         <div class="card-content">
             <h3>Rabu</h3><br>
             <% for(var i = 0; i < dataRabu.length; i++) { %>
-                <a href="/siswa/detail/<%= dataRabu[i].id_mapel %>">
+                <a href="/siswa/detail/<%= dataRabu[i].mapel_id %>">
                     <h4><%= dataRabu[i].nama_mapel %></h4>
                     <p><%= dataRabu[i].nama %></p>
                     <p><%= dataRabu[i].jam_awal %> - <%= dataRabu[i].jam_akhir %></p><br>
@@ -125,7 +123,7 @@
         <div class="card-content">
             <h3>Kamis</h3><br>
             <% for(var i = 0; i < dataKamis.length; i++) { %>
-                <a href="/siswa/detail/<%= dataKamis[i].id_mapel %>">
+                <a href="/siswa/detail/<%= dataKamis[i].mapel_id %>">
                     <h4><%= dataKamis[i].nama_mapel %></h4>
                     <p><%= dataKamis[i].nama %></p>
                     <p><%= dataKamis[i].jam_awal %> - <%= dataKamis[i].jam_akhir %></p><br>
@@ -139,7 +137,7 @@
         <div class="card-content">
             <h3>Jumat</h3><br>
             <% for(var i = 0; i < dataJumat.length; i++) { %>
-                <a href="/siswa/detail/<%= dataJumat[i].id_mapel %>">
+                <a href="/siswa/detail/<%= dataJumat[i].mapel_id %>">
                     <h4><%= dataJumat[i].nama_mapel %></h4>
                     <p><%= dataJumat[i].nama %></p>
                     <p><%= dataJumat[i].jam_awal %> - <%= dataJumat[i].jam_akhir %></p><br>
@@ -153,7 +151,7 @@
         <div class="card-content">
             <h3>Sabtu</h3><br>
             <% for(var i = 0; i < dataSabtu.length; i++) { %>
-                <a href="/siswa/detail/<%= dataSabtu[i].id_mapel %>">
+                <a href="/siswa/detail/<%= dataSabtu[i].mapel_id %>">
                     <h4><%= dataSabtu[i].nama_mapel %></h4>
                     <p><%= dataSabtu[i].nama %></p>
                     <p><%= dataSabtu[i].jam_awal %> - <%= dataSabtu[i].jam_akhir %></p><br>
