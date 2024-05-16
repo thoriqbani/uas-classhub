@@ -31,6 +31,7 @@ router.get('/', async function(req, res, next) {
           dataJumat: data_harijumat,
           dataSabtu: data_harisabtu,
           nama: data_user[0].nama,
+          level: data_user[0].level_user,
           photos: data_user[0].photos
         })
       }
