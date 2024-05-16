@@ -3,157 +3,164 @@
 <%- include('../partials/message') %>
 
 <style>
-
-
     .profile {
-    display: flex;
-    justify-content: center; /* Mengatur profil ke posisi tengah secara horizontal */
-    align-items: center; /* Mengatur profil ke posisi tengah secara vertikal */
-    margin-bottom: 20px; /* Jarak bawah antara profil dan card jadwal */
-}
-.profile-info img {
-    border-radius: 50%; /* Membuat gambar bundar */
-    width: 150px; /* Menyesuaikan ukuran gambar */
-    height: 150px;
-}
-.profile-info h2 {
-    text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
-}
-.schedule {
-    display: flex; /* Menggunakan Flexbox */
-    flex-wrap: wrap; /* Mengatur agar card-wrap ke baris baru jika tidak cukup ruang */
-    justify-content: center; /* Mengatur agar card-center di pusat secara horizontal */
-}
+        display: flex;
+        justify-content: center; /* Mengatur profil ke posisi tengah secara horizontal */
+        align-items: center; /* Mengatur profil ke posisi tengah secara vertikal */
+        margin-bottom: 20px; /* Jarak bawah antara profil dan card jadwal */
+    }
+    .profile-info img {
+        border-radius: 50%; /* Membuat gambar bundar */
+        width: 150px; /* Menyesuaikan ukuran gambar */
+        height: 150px;
+    }
+    .profile-info h2 {
+        text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
+    }
+    .schedule {
+        display: grid; /* Menggunakan Grid Layout */
+        grid-template-columns: repeat(3, 1fr); /* Membuat 3 kolom */
+        gap: 20px; /* Jarak antara kartu */
+        justify-items: center; /* Mengatur item di tengah secara horizontal */
+        padding: 20px;
+    }
 
-.card {
-    background-color: #ff4eff; /* Warna ungu */
-    text-align: center;
-    width: 400px;
-    margin: 10px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-}
+    .card {
+        background-color: #f57df5; /* Warna ungu */
+        text-align: center;
+        width: 100%; /* Sesuaikan lebar kartu dengan kolom */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
 
-.card-content {
-    padding: 30px;
-}
+    .card-content {
+        padding: 20px;
+    }
 
-.card h3 {
-    margin: 0;
-    font-size: 20px;
-    color: #ffffff;
-}
-.card h4 {
-    margin: 0;
-    font-size: 20px;
-    color: #fbff00;
-}
-.card p {
-    margin: 5px 0;
-    color: #000000;
-}
-.profile-info h6{
-    text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
-}
-
+    .card h3 {
+        width: 100%;
+        margin: 0;
+        font-size: 20px;
+        color: #ffffff;
+        background-color: rgb(110, 99, 255); /* Warna biru untuk latar belakang judul */
+        padding: 10px; /* Padding untuk memberikan ruang di sekitar teks */
+        border-radius: 10px 10px 10px 10px ; /* Membulatkan sudut atas */
+    }
+    .card h4 {
+        margin: 0;
+        font-size: 18px;
+        color: #fbff00;
+    }
+    .card p {
+        margin: 5px 0;
+        color: #000000;
+    }
+    .profile-info h6 {
+        text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
+    }
+    .card a {
+        text-decoration: none; /* Menghilangkan garis bawah pada tautan */
+        color: inherit; /* Menggunakan warna teks yang ada */
+    }
 </style>
+
 <!-- Profil -->
-<!-- <div class="profile">
+<!-- 
+<div class="profile">
     <div class="profile-info">
         <img src="/images/foto_user/<%= photos %>" alt="Foto Profil">
         <h2><%= nama %></h2>
         <h6>Siswa</h6>
-       
     </div>
-</div> -->
+</div> 
+-->
 
-<!-- Card Jadwal -->
+<!-- Schedule Cards -->
 <div class="schedule">
-    <% for(var i=0; i<dataSenin.length; i++) { %>
-        <div class="card">
-            <a href="/siswa/detail/<%= dataSenin[i].mapel_id %>">
-                <div class="card-content">
-                    <h3><%= dataSenin[i].nama_mapel %></h3>
-                    <h4><%= dataSenin[i].nama %></h4>
-                    <p><%= dataSenin[i].hari %> ,<%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></p>
-                </div>
-            </a>
+    <!-- Card Jadwal untuk Hari Senin -->
+    <div class="card">
+        <div class="card-content">
+            <h3>Senin</h3><br>
+            <% for(var i = 0; i < dataSenin.length; i++) { %>
+                <a href="/siswa/detail/<%= dataSenin[i].id_mapel %>">
+                    <h4><%= dataSenin[i].nama_mapel %></h4>
+                    <p><%= dataSenin[i].nama %></p>
+                    <p><%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></p><br>
+                </a>
+            <% } %>
         </div>
-    <% } %>
-</div>
-<!-- Card Jadwal -->
-<div class="schedule">
-    <% for(var i=0; i<dataSelasa.length; i++) { %>
-        <div class="card">
-            <a href="/siswa/detail/<%= dataSelasa[i].mapel_id %>">
-                <div class="card-content">
-                    <h3><%= dataSelasa[i].nama_mapel %></h3>
-                    <h4><%= dataSelasa[i].nama %></h4>
-                    <p><%= dataSelasa[i].hari %> ,<%= dataSelasa[i].jam_awal %> - <%= dataSelasa[i].jam_akhir %></p>
-                </div>
-            </a>
-        </div>
-    <% } %>
-</div>
-<!-- Card Jadwal -->
-<div class="schedule">
-    <% for(var i=0; i<dataRabu.length; i++) { %>
-        <div class="card">
-            <a href="/siswa/detail/<%= dataRabu[i].mapel_id %>">
-                <div class="card-content">
-                    <h3><%= dataRabu[i].nama_mapel %></h3>
-                    <h4><%= dataRabu[i].nama %></h4>
-                    <p><%= dataRabu[i].hari %> ,<%= dataRabu[i].jam_awal %> - <%= dataRabu[i].jam_akhir %></p>
-                </div>
-            </a>
-        </div>
-    <% } %>
-</div>
-<!-- Card Jadwal -->
-<div class="schedule">
-    <% for(var i=0; i<dataKamis.length; i++) { %>
-        <div class="card">
-            <a href="/siswa/detail/<%= dataKamis[i].mapel_id %>">
-                <div class="card-content">
-                    <h3><%= dataKamis[i].nama_mapel %></h3>
-                    <h4><%= dataKamis[i].nama %></h4>
-                    <p><%= dataKamis[i].hari %> ,<%= dataKamis[i].jam_awal %> - <%= dataKamis[i].jam_akhir %></p>
-                </div>
-            </a>
-        </div>
-    <% } %>
-</div>
-<!-- Card Jadwal -->
-<div class="schedule">
-    <% for(var i=0; i<dataJumat.length; i++) { %>
-        <div class="card">
-            <a href="/siswa/detail/<%= dataJumat[i].mapel_id %>">
-                <div class="card-content">
-                    <h3><%= dataJumat[i].nama_mapel %></h3>
-                    <h4><%= dataJumat[i].nama %></h4>
-                    <p><%= dataJumat[i].hari %> ,<%= dataJumat[i].jam_awal %> - <%= dataJumat[i].jam_akhir %></p>
-                </div>
-            </a>
-        </div>
-    <% } %>
-</div>
-<!-- Card Jadwal -->
-<div class="schedule">
-    <% for(var i=0; i<dataSabtu.length; i++) { %>
-        <div class="card">
-            <a href="/siswa/detail/<%= dataSabtu[i].mapel_id %>">
-                <div class="card-content">
-                    <h3><%= dataSabtu[i].nama_mapel %></h3>
-                    <h4><%= dataSabtu[i].nama %></h4>
-                    <p><%= dataSabtu[i].hari %> ,<%= dataSabtu[i].jam_awal %> - <%= dataSabtu[i].jam_akhir %></p>
-                </div>
-            </a>
-        </div>
-    <% } %>
-</div>
+    </div>
 
+    <!-- Card Jadwal untuk Hari Selasa -->
+    <div class="card">
+        <div class="card-content">
+            <h3>Selasa</h3><br>
+            <% for(var i = 0; i < dataSelasa.length; i++) { %>
+                <a href="/siswa/detail/<%= dataSelasa[i].id_mapel %>">
+                    <h4><%= dataSelasa[i].nama_mapel %></h4>
+                    <p><%= dataSelasa[i].nama %></p>
+                    <p><%= dataSelasa[i].jam_awal %> - <%= dataSelasa[i].jam_akhir %></p><br>
+                </a>
+            <% } %>
+        </div>
+    </div>
 
+    <!-- Card Jadwal untuk Hari Rabu -->
+    <div class="card">
+        <div class="card-content">
+            <h3>Rabu</h3><br>
+            <% for(var i = 0; i < dataRabu.length; i++) { %>
+                <a href="/siswa/detail/<%= dataRabu[i].id_mapel %>">
+                    <h4><%= dataRabu[i].nama_mapel %></h4>
+                    <p><%= dataRabu[i].nama %></p>
+                    <p><%= dataRabu[i].jam_awal %> - <%= dataRabu[i].jam_akhir %></p><br>
+                </a>
+            <% } %>
+        </div>
+    </div>
 
+    <!-- Card Jadwal untuk Hari Kamis -->
+    <div class="card">
+        <div class="card-content">
+            <h3>Kamis</h3><br>
+            <% for(var i = 0; i < dataKamis.length; i++) { %>
+                <a href="/siswa/detail/<%= dataKamis[i].id_mapel %>">
+                    <h4><%= dataKamis[i].nama_mapel %></h4>
+                    <p><%= dataKamis[i].nama %></p>
+                    <p><%= dataKamis[i].jam_awal %> - <%= dataKamis[i].jam_akhir %></p><br>
+                </a>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Card Jadwal untuk Hari Jumat -->
+    <div class="card">
+        <div class="card-content">
+            <h3>Jumat</h3><br>
+            <% for(var i = 0; i < dataJumat.length; i++) { %>
+                <a href="/siswa/detail/<%= dataJumat[i].id_mapel %>">
+                    <h4><%= dataJumat[i].nama_mapel %></h4>
+                    <p><%= dataJumat[i].nama %></p>
+                    <p><%= dataJumat[i].jam_awal %> - <%= dataJumat[i].jam_akhir %></p><br>
+                </a>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Card Jadwal untuk Hari Sabtu -->
+    <div class="card">
+        <div class="card-content">
+            <h3>Sabtu</h3><br>
+            <% for(var i = 0; i < dataSabtu.length; i++) { %>
+                <a href="/siswa/detail/<%= dataSabtu[i].id_mapel %>">
+                    <h4><%= dataSabtu[i].nama_mapel %></h4>
+                    <p><%= dataSabtu[i].nama %></p>
+                    <p><%= dataSabtu[i].jam_awal %> - <%= dataSabtu[i].jam_akhir %></p><br>
+                </a>
+            <% } %>
+        </div>
+    </div>
+</div>
 
 <%- include('../partials/footer') %>
