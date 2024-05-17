@@ -32,7 +32,8 @@ router.get('/',  async function(req, res, next) {
                 pages: 'Edit Profile',
                 nama: data_user[0].nama,
                 level: data_user[0].level_user,
-                photos: data_user[0].photos
+                photos: data_user[0].photos,
+                email: data_user[0].email
             })
         }
         } else {
