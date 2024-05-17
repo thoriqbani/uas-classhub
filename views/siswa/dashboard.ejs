@@ -5,30 +5,30 @@
 <style>
     .profile {
         display: flex;
-        justify-content: center; /* Mengatur profil ke posisi tengah secara horizontal */
-        align-items: center; /* Mengatur profil ke posisi tengah secara vertikal */
-        margin-bottom: 20px; /* Jarak bawah antara profil dan card jadwal */
+        justify-content: center; /* Centers profile horizontally */
+        align-items: center; /* Centers profile vertically */
+        margin-bottom: 20px; /* Space below profile and schedule cards */
     }
     .profile-info img {
-        border-radius: 50%; /* Membuat gambar bundar */
-        width: 150px; /* Menyesuaikan ukuran gambar */
+        border-radius: 50%; /* Makes image round */
+        width: 150px; /* Adjust image size */
         height: 150px;
     }
     .profile-info h2 {
-        text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
+        text-align: center; /* Centers name horizontally */
     }
     .schedule {
-        display: grid; /* Menggunakan Grid Layout */
-        grid-template-columns: repeat(3, 1fr); /* Membuat 3 kolom */
-        gap: 20px; /* Jarak antara kartu */
-        justify-items: center; /* Mengatur item di tengah secara horizontal */
+        display: grid; /* Uses Grid Layout */
+        grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
+        gap: 20px; /* Space between cards */
+        justify-items: center; /* Centers items horizontally */
         padding: 20px;
     }
 
     .card {
-        background-color: #ea9ed9; /* Warna ungu */
+        background-color: #ea9ed9; /* Purple color */
         text-align: center;
-        width: 100%; /* Sesuaikan lebar kartu dengan kolom */
+        width: 100%; /* Matches card width to column width */
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         overflow: hidden;
@@ -45,7 +45,7 @@
         color: #ffffff;
         background-color: #6b7991; 
         padding: 10px;
-        border-radius: 10px 10px 10px 10px ;
+        border-radius: 10px;
     }
     .card h4 {
         margin: 0;
@@ -57,11 +57,11 @@
         color: #41454a;
     }
     .profile-info h6 {
-        text-align: center; /* Mengatur nama ke posisi tengah secara horizontal */
+        text-align: center; /* Centers name horizontally */
     }
     .card a {
-        text-decoration: none; /* Menghilangkan garis bawah pada tautan */
-        color: inherit; /* Menggunakan warna teks yang ada */
+        text-decoration: none; /* Removes underline from links */
+        color: inherit; /* Uses current text color */
     }
     .warna-putih {
         color: white;
@@ -69,7 +69,37 @@
     .warna-abu {
         background-color: #a3adba;
     }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+        .schedule {
+            grid-template-columns: 1fr; /* Single column layout for mobile */
+        }
+
+        .card h3, .card h4, .card p {
+            font-size: 16px; /* Smaller font size for mobile */
+        }
+
+        .card-content {
+            padding: 10px; /* Less padding for mobile */
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .schedule {
+            grid-template-columns: repeat(2, 1fr); /* Two column layout for tablets */
+        }
+
+        .card h3, .card h4, .card p {
+            font-size: 18px; /* Medium font size for tablets */
+        }
+
+        .card-content {
+            padding: 15px; /* Medium padding for tablets */
+        }
+    }
 </style>
+
 
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
     <!-- Navbar -->
