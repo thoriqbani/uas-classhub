@@ -34,7 +34,8 @@ router.get('/', async function(req, res, next) {
           dataSabtu: data_harisabtu,
           nama: data_user[0].nama,
           level: data_user[0].level_user,
-          photos: data_user[0].photos
+          photos: data_user[0].photos,
+          email: data_user[0].email
         })
       }
     } else {
@@ -72,7 +73,8 @@ router.get('/detail/(:mapelID)', async function(req, res, next) {
           hariIni: hariini,
           jamSekarang: waktu,
           nama: data_user[0].nama,
-          photos: data_user[0].photos
+          photos: data_user[0].photos,
+          email: data_user[0].email,
         })
       }
     } else {
