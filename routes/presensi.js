@@ -15,7 +15,9 @@ router.get('/', async function(req, res, next) {
         } else {
           res.render('siswa/presensi', {
             nama: data_user[0].nama,
-            photos: data_user[0].photos
+            photos: data_user[0].photos,
+            email: data_user[0].email,
+            level_user: data_user[0].level_user,
           })
         }
       } else {

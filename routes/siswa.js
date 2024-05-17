@@ -33,7 +33,7 @@ router.get('/', async function(req, res, next) {
           dataJumat: data_harijumat,
           dataSabtu: data_harisabtu,
           nama: data_user[0].nama,
-          level: data_user[0].level_user,
+          level_user: data_user[0].level_user,
           photos: data_user[0].photos,
           email: data_user[0].email
         })
@@ -75,6 +75,7 @@ router.get('/detail/(:mapelID)', async function(req, res, next) {
           nama: data_user[0].nama,
           photos: data_user[0].photos,
           email: data_user[0].email,
+          level_user: data_user[0].level_user,
         })
       }
     } else {
