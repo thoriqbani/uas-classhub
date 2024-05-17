@@ -1,38 +1,66 @@
 <style>
-.profile-container {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: 20px;
-}
+  .profile-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+  }
 
-.warna-putih {
-  color: white;
-}
+  .warna-putih {
+    color: white;
+  }
 
-.profile-picture {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 20px;
-  margin-bottom: 20px;
-}
+  .profile-picture {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
 
-.profile-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 
-.profile-info h2 {
-  font-size: 18px;
-  margin-bottom: 5px; /* Nilai margin-bottom dikurangi untuk membuat jarak antara elemen menjadi lebih dekat */
-}
+  .profile-info h2 {
+    font-size: 18px;
+    margin-bottom: 5px; /* Nilai margin-bottom dikurangi untuk membuat jarak antara elemen menjadi lebih dekat */
+  }
 
-.profile-info p {
-  font-size: 14px;
-  color: #666;
-}
+  .profile-info p {
+    font-size: 14px;
+    color: #666;
+  }
+
+  @media (max-width: 768px) {
+    .profile-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-picture {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+    }
+
+    .navbar-nav .nav-item .nav-link {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-nav .nav-item .nav-link .icon {
+        margin-right: 10px;
+    }
+  }
+
 </style>
 
 
@@ -148,8 +176,16 @@
             <h6 class="font-weight-bolder mb-0"><%= pages %></h6>
           </nav>
           <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-              
+            <div class="pe-md-3 d-flex align-items-end">
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-end">
+                <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                  </div>
+                </a>
+              </li>
             </div>
           </div>
         </div>
