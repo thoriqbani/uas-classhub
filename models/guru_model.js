@@ -1,92 +1,90 @@
-const connect = require('../config/db.js')
+const connect = require('../config/db.js');
 
 class guru_model {
-    static async getAll(){
+    static async getAll() {
         return new Promise((resolve, reject) => {
-            connect.query('select * from user where level_user = "guru" order by id desc', (err, rows) => {
-                if(err){
+            connect.query('SELECT * FROM user WHERE level_user = "guru" ORDER BY id DESC', (err, rows) => {
+                if (err) {
                     reject(err);
                 } else {
                     resolve(rows);
                 }
-            })
-        })
+            });
+        });
     }
 
-    static async Store(Data){
-        return new Promise((resolve, reject) =>{
-            connect.query('insert into user set ? ', Data, function(err, result){
-                if(err){
-                    reject(err)
-                    console.log(err)
+    static async store(data) {
+        return new Promise((resolve, reject) => {
+            connect.query('INSERT INTO user SET ?', data, function(err, result) {
+                if (err) {
+                    reject(err);
+                    console.log(err);
                 } else {
                     resolve(result);
                 }
-            })
-        })
+            });
+        });
     }
 
-    static async login(email){
+    static async login(email) {
         return new Promise((resolve, reject) => {
-            connect.query('select * from user where email = ?', email, function(err, rows){
-                if(err){
-                    reject(err)
+            connect.query('SELECT * FROM user WHERE email = ?', email, function(err, rows) {
+                if (err) {
+                    reject(err);
                 } else {
-                    resolve(rows)
+                    resolve(rows);
                 }
-            })
-        })
+            });
+        });
     }
 
-    static async getByID(id){
+    static async getByID(id) {
         return new Promise((resolve, reject) => {
-            connect.query('select * from user where id = ?', id, function(err, rows){
-                if(err){
-                    reject(err)
+            connect.query('SELECT * FROM user WHERE id = ?', id, function(err, rows) {
+                if (err) {
+                    reject(err);
                 } else {
-                    resolve(rows)
+                    resolve(rows);
                 }
-            })
-        })
+            });
+        });
     }
 
-    static async getByEmail(email){
+    static async getByEmail(email) {
         return new Promise((resolve, reject) => {
-            connect.query('select * from user where email = ?', email, function(err, rows){
-                if(err){
-                    reject(err)
+            connect.query('SELECT * FROM user WHERE email = ?', email, function(err, rows) {
+                if (err) {
+                    reject(err);
                 } else {
-                    resolve(rows)
+                    resolve(rows);
                 }
-            })
-        })
+            });
+        });
     }
 
-    static async Update(id, Data){
+    static async update(id, data) {
         return new Promise((resolve, reject) => {
-        connect.query('update user set ? where id = ?', [Data, id], function(err, result){
-            if(err){
-                reject(err)
-            } else {
-                resolve(result)
-            }
-            
-        })
-    })
-    }
-
-    static async Delete(id){
-        return new Promise((resolve, reject) => {
-            connect.query('delete from user where id_user = ?', id, function(err, result){
-                if(err){
-                    reject(err)
+            connect.query('UPDATE user SET ? WHERE id = ?', [data, id], function(err, result) {
+                if (err) {
+                    reject(err);
                 } else {
-                    resolve(result)
+                    resolve(result);
                 }
-            })
-        })
+            });
+        });
     }
 
+    static async delete(id) {
+        return new Promise((resolve, reject) => {
+            connect.query('DELETE FROM user WHERE id = ?', id, function(err, result) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
 }
 
 module.exports = guru_model;

@@ -100,6 +100,42 @@
     }
 </style>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Guru</title>
+    <link rel="stylesheet" href="/path/to/your/css/style.css"> <!-- Sesuaikan dengan path CSS Anda -->
+</head>
+<body>
+    <h1>Dashboard Guru</h1>
+    <p>Selamat datang, <%= nama %></p>
+    <a href="/tugas/create" class="btn btn-secondary">Create Tugas</a> <!-- Mengarah ke halaman create tugas -->
 
-
-<%- include('../partials/footer') %>
+    <h2>Daftar Tugas</h2>
+    <% if (tugasList && tugasList.length > 0) { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Judul</th>
+                    <th>Deskripsi</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% tugasList.forEach(tugas => { %>
+                    <tr>
+                        <td><%= tugas.judul %></td>
+                        <td><%= tugas.deskripsi %></td>
+                        <td><a href="/guru/tugas/download/<%= tugas.file_tugas %>" download>Download</a></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>Tidak ada tugas yang tersedia.</p>
+    <% } %>
+</body>
+<%- include('../partials/footer') %> <!-- Pastikan ini ada sebelum penutupan tag body -->
+</html>

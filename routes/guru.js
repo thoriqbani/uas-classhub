@@ -1,44 +1,44 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcrypt');
-const multer = require('multer')
-const path = require('path')
-const fs = require('fs')
 const guru_model = require('../models/guru_model');
+const tugas_model = require('../models/tugas_model');
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-      cb(null, "public/upload/tugas_pdf");
-    },
-    filename: (req, file, cb) => {
-      console.log(file);
-      cb(null, Date.now() + path.extname(file.originalname));
-    },
-});
-
-router.get('/', async function(req, res, next) {
-    let id = req.session.userId
+router.get('/', async (req, res) => {
     try {
-        let data_user = await guru_model.getByID(id)
+        let userId = req.session.userId;
+        let data_user = await guru_model.getByID(userId);
+        let tugasList = await tugas_model.getAllByUserId(userId);
 
         if (data_user.length > 0) {
             if (data_user[0].level_user != 'guru') {
-                res.redirect('/logout')
+                res.redirect('/logout');
             } else {
                 res.render('guru/dashboard', {
-                    pages: 'Dashboard',
+                    tugasList: tugasList,
+                    pages: 'Dashboard Guru',
                     nama: data_user[0].nama,
                     level_user: data_user[0].level_user,
                     photos: data_user[0].photos,
                     email: data_user[0].email
-                })
+                });
             }
         } else {
-            res.status(401).json({error: 'user tidak ada'})  
+            res.status(401).json({ error: 'user tidak ada' });
         }
     } catch (error) {
-        console.error(error)
-        res.status(501).json('error pada fungsi')
+        console.error(error);
+        res.status(501).json('error pada fungsi');
+    }
+});
+
+router.get('/', async (req, res) => {
+    try {
+        const tugasList = await tugas_model.getAllByUserId(req.session.userId);
+        const nama = req.session.nama;
+        res.render('guru/dashboard', { tugasList, nama });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
     }
 });
 
