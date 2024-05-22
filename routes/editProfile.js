@@ -31,9 +31,12 @@ router.get('/',  async function(req, res, next) {
             res.render('siswa/editProfile', {
                 pages: 'Edit Profile',
                 nama: data_user[0].nama,
+                jenis_kelamin: data_user[0].jenis_kelamin,
+                tanggal_lahir: data_user[0].tanggal_lahir,
+                no_hp: data_user[0].no_hp,
                 level_user: data_user[0].level_user,
                 photos: data_user[0].photos,
-                email: data_user[0].email
+                email: data_user[0].email,
             })
         }
         } else {
