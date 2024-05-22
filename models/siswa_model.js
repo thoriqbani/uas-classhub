@@ -70,7 +70,6 @@ class siswa_model {
             } else {
                 resolve(result)
             }
-            
         })
     })
     }

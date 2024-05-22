@@ -28,18 +28,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
   cookie: {
-    maxAge: 60000, // 1 menit untuk testing
+    maxAge: 6000000000000000,
     secure: false,
     httpOnly: true,
     sameSite: 'strict'
   },
   store: new MemoryStore({
-    checkPeriod: 86400000, // 1 hari
+    checkPeriod: 864000000000000,
     max: 1000000
   }),
   saveUninitialized: true,
-  resave: false,
-  secret: 'your_secret_key'
+  resave: true,
+  secret: 'secret'
 }));
 
 app.use(flash());
@@ -47,7 +47,7 @@ app.use(flash());
 app.use('/', indexRouter);
 app.use('/siswa', siswaRouter);
 app.use('/guru', guruRouter);
-app.use('/tugas', tugasRouter); // Pastikan ini sudah benar
+app.use('/guru/tugas', tugasRouter);
 app.use('/siswa/presensi', presensiRouter);
 app.use('/siswa/materi', materiRouter);
 app.use('/siswa/editProfile', editProfileRouter);

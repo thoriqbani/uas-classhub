@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
-const fs = require('fs'); // Diperlukan untuk memeriksa apakah file ada
-
-const tugas_model = require('../models/tugas_model'); // Pastikan path ini benar
+const fs = require('fs');
+const tugas_model = require('../models/tugas_model'); 
+const guru_model = require('../models/guru_model'); // Pastikan path ini benar
+const jadwal_model = require('../models/jadwal_model');
 
 // Konfigurasi penyimpanan untuk multer
 const storage = multer.diskStorage({
@@ -16,45 +17,47 @@ const storage = multer.diskStorage({
     }
 });
 
-
+router.get('/', async function(req, res){
+    let userId = req.session.userId
+    let data_user = await guru_model.getByID(userId);
+    console.log(data_user)
+    let dataMapel = await jadwal_model.getByUserID(userId)
+    console.log(dataMapel)
+    
+    res.render('guru/create_tugas', {
+        dataMapel: dataMapel,
+        nama: data_user[0].nama,
+        level_user: data_user[0].level_user,
+        photos: data_user[0].photos,
+        email: data_user[0].email
+    });
+});
 
 const upload = multer({ storage: storage });
 
-// Route untuk menangani unggah file dan membuat tugas baru
 router.post('/create', upload.single('file_tugas'), async (req, res) => {
     try {
         const { judul, deskripsi, mapel_id } = req.body;
         const file_tugas = req.file.filename;
+        const today = new Date();
+        const tanggal_deadline = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        const waktu_deadline = today.getHours() + ':' + today.getMinutes();
         const data = {
             judul,
             deskripsi,
             file_tugas,
+            tanggal_deadline: tanggal_deadline,
+            waktu_deadline: waktu_deadline,
             mapel_id,
             user_id: req.session.userId
         };
         await tugas_model.store(data);
-        console.log("File uploaded:", req.file.filename); // Log untuk memastikan file diunggah dengan benar
+        console.log("File uploaded:", req.file.filename);
         res.redirect('/guru');
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
-});
-
-router.get('/create', (req, res) => {
-    res.render('guru/create_tugas'); // Pastikan view ini ada
-});
-
-router.get('/download/:filename', (req, res) => {
-    const filename = req.params.filename;
-    const filepath = path.join(__dirname, '../public/upload/tugas_pdf', filename);
-    console.log("Attempting to download file:", filepath); // Log untuk memastikan path benar
-    res.download(filepath, filename, (err) => {
-        if (err) {
-            console.error("Error downloading file:", err);
-            res.status(404).send('File not found');
-        }
-    });
 });
 
 module.exports = router;

@@ -62,7 +62,7 @@ class guru_model {
         });
     }
 
-    static async update(id, data) {
+    static async Update(id, data) {
         return new Promise((resolve, reject) => {
             connect.query('UPDATE user SET ? WHERE id = ?', [data, id], function(err, result) {
                 if (err) {
