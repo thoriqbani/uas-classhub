@@ -40,7 +40,7 @@ class guru_model {
 
     static async getByID(id) {
         return new Promise((resolve, reject) => {
-            connect.query('SELECT * FROM user WHERE id = ?', id, function(err, rows) {
+            connect.query('SELECT * FROM user WHERE user.id = ?', id, function(err, rows) {
                 if (err) {
                     reject(err);
                 } else {

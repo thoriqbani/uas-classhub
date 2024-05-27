@@ -24,13 +24,22 @@ router.get('/', async function(req, res){
     let dataMapel = await jadwal_model.getByUserID(userId)
     console.log(dataMapel)
     
-    res.render('guru/create_tugas', {
-        dataMapel: dataMapel,
-        nama: data_user[0].nama,
-        level_user: data_user[0].level_user,
-        photos: data_user[0].photos,
-        email: data_user[0].email
-    });
+    if (data_user.length > 0) {
+        if (data_user[0].level_user != 'guru') {
+          res.redirect('/logout')
+        } else {
+            res.render('guru/create_tugas', {
+                pages: 'tugas',
+                dataMapel: dataMapel,
+                nama: data_user[0].nama,
+                level_user: data_user[0].level_user,
+                photos: data_user[0].photos,
+                email: data_user[0].email
+            });
+        }
+      } else {
+        res.status(401).json({error: 'user tidak ada'})  
+      }
 });
 
 const upload = multer({ storage: storage });
@@ -48,8 +57,8 @@ router.post('/create', upload.single('file_tugas'), async (req, res) => {
             file_tugas,
             tanggal_deadline: tanggal_deadline,
             waktu_deadline: waktu_deadline,
+            user_id: req.session.userId,
             mapel_id,
-            user_id: req.session.userId
         };
         await tugas_model.store(data);
         console.log("File uploaded:", req.file.filename);

@@ -1,0 +1,46 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbarGuru') %>
+<%- include('../partials/message') %>
+
+
+<style>
+    .kebawah{
+      margin-top: 230px;
+    }
+  </style>
+  
+  <div class="kebawah container">
+    <div class="row mt-lg-n15 mt-md-n11 mt-n10">
+        <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+            <div class="card z-index-0">
+                <div class="card-header text-center pt-4">
+                    <h5>Tambah Materi</h5>
+                </div>
+                <div class="card-body">
+                    <form role="form text-left" action="/guru/materi/create" method="post"
+                        enctype="multipart/form-data">
+                        <div class="mb-3">
+                            <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul"
+                            aria-label="Judul" aria-describedby="email-addon">
+                        </div>
+                          <input type="text" class="form-control" id="mapel_id" name="mapel_id" value="<%= dataMapel[0].mapel_id %>" hidden>
+                        <div class="mb-3">
+                          <input type="text" class="form-control" id="deskripsi" name="deskripsi"
+                          placeholder="Deskripsi" aria-label="Deskripsi" aria-describedby="email-addon">
+                        </div>
+                        <div class="mb-3">
+                            <input type="file" class="form-control" id="file_tugas" name="file_tugas"
+                                placeholder="File Tugas" aria-label="File Tugas" aria-describedby="email-addon">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Tambah</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+
+<%- include('../partials/footer') %>

@@ -9,11 +9,14 @@ const MemoryStore = require('session-memory-store')(session);
 
 var indexRouter = require('./routes/index');
 var siswaRouter = require('./routes/siswa');
+var materiSiswaRouter = require('./routes/materiSiswa');
+var presensiRouter = require('./routes/presensiSiswa');
+var tugasSiswaRouter = require('./routes/tugasSiswa');
+var editProfileSiswaRouter = require('./routes/editProfileSiswa');
 var guruRouter = require('./routes/guru');
-var tugasRouter = require('./routes/tugas'); // Pastikan ini sudah benar
-var materiRouter = require('./routes/materi');
-var presensiRouter = require('./routes/presensi');
-var editProfileRouter = require('./routes/editProfile');
+var tugasGuruRouter = require('./routes/tugasGuru');
+var materiGuruRouter = require('./routes/materiGuru');
+var editProfileGuruRouter = require('./routes/editProfileGuru');
 
 var app = express();
 
@@ -45,12 +48,15 @@ app.use(session({
 app.use(flash());
 
 app.use('/', indexRouter);
-app.use('/siswa', siswaRouter);
 app.use('/guru', guruRouter);
-app.use('/guru/tugas', tugasRouter);
+app.use('/guru/tugas', tugasGuruRouter);
+app.use('/guru/materi', materiGuruRouter);
+app.use('/guru/editProfile', editProfileGuruRouter);
+app.use('/siswa', siswaRouter);
 app.use('/siswa/presensi', presensiRouter);
-app.use('/siswa/materi', materiRouter);
-app.use('/siswa/editProfile', editProfileRouter);
+app.use('/siswa/tugas', tugasSiswaRouter);
+app.use('/siswa/materi', materiSiswaRouter);
+app.use('/siswa/editProfile', editProfileSiswaRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));

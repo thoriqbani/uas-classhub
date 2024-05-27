@@ -9,7 +9,6 @@
 .card {
     flex: 0 0 auto;
 }
-
 </style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -18,7 +17,7 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Basic Bootstrap Table -->
         <div class="row mb-5">
-            <div class="swiper-container">
+            <div class="swiper-container swiper-container-tugas">
                 <div class="swiper-wrapper">
                     <% for(var i = 0; i < tugasList.length; i++) { %>
                         <div class="swiper-slide">
@@ -45,6 +44,7 @@
                                     </li>
                                     <li class="list-group-item"><a>Deskripsi : </a><%= tugasList[i].deskripsi %></li>
                                     <li class="list-group-item"><a>Deadline : <%= tugasList[i].tanggal_deadline %> <%= tugasList[i].waktu_deadline %></a></li>
+                                    <li class="list-group-item"><a href="/upload/tugas_pdf/<%= tugasList[i].file_tugas %>" download="<%= tugasList[i].judul %>">Download Disini</a></li>
                                     <li class="list-group-item">
                                         <div class="mt-3 px-3">
                                             <a href="../pengumpulan/index_mahasiswa/<%= tugasList[i].id %>" class="btn btn-sm btn-primary">Detail Tugas</a>
@@ -57,10 +57,10 @@
                 </div>
             
                 <!-- Add Pagination if needed -->
-                <div class="swiper-pagination"></div>
-            
+                
                 
             </div>
+            <div class="swiper-pagination swiper-pagination-tugas"></div>
         </div>
     </div>
     <!--/ Basic Bootstrap Table -->
@@ -78,35 +78,35 @@
             </div>
 
             <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <% for(var i = 0; i < tugasList.length; i++) { %>
+                <div class="swiper-wrapper swiper-container-materi">
+                    <% for(var i = 0; i < materiList.length; i++) { %>
                         <div class="swiper-slide">
                             <div class="card mb-4 mx-2" style="width: 20rem;">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item">
-                                        <h4><%= tugasList[i].nama_mapel %></h4>
+                                        <h4><%= materiList[i].nama_mapel %></h4>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        <span><b><%= tugasList[i].judul %></b></span>
+                                        <span><b><%= materiList[i].judul %></b></span>
                                         <div class="dropdown">
                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                             </button>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="/tugas/edit/<%= tugasList[i].id %>">
+                                                <a class="dropdown-item" href="/materi/edit/<%= materiList[i].id %>">
                                                     <i class="bx bx-edit-alt me-1"></i> Edit
                                                 </a>
-                                                <a class="dropdown-item" href="/tugas/delete/<%= tugasList[i].id %>">
+                                                <a class="dropdown-item" href="/materi/delete/<%= materiList[i].id %>">
                                                     <i class="bx bx-trash me-1"></i> Delete
                                                 </a>
                                             </div>
                                         </div>
                                     </li>
-                                    <li class="list-group-item"><a>Deskripsi : </a><%= tugasList[i].deskripsi %></li>
-                                    <li class="list-group-item"><a>Deadline : 20.00 10-05-2024</a></li>
+                                    <li class="list-group-item"><a>Deskripsi : </a><%= materiList[i].deskripsi %></li>
+                                    <li class="list-group-item"><a href="/upload/materi_pdf/<%= materiList[i].file_materi %>" download="<%= materiList[i].judul %>">Download Disini</a></li>
                                     <li class="list-group-item">
                                         <div class="mt-3 px-3">
-                                            <a href="../pengumpulan/index_mahasiswa/<%= tugasList[i].id %>" class="btn btn-sm btn-primary">Detail Tugas</a>
+                                            <a href="../pengumpulan/index_mahasiswa/<%= materiList[i].id %>" class="btn btn-sm btn-primary">Detail materi</a>
                                         </div>
                                     </li>
                                 </ul>
@@ -116,7 +116,7 @@
                 </div>
             
                 <!-- Add Pagination if needed -->
-                <div class="swiper-pagination"></div>
+                <div class="swiper-pagination swiper-pagination-materi"></div>
             
                 
             </div>
@@ -124,5 +124,32 @@
     </div>
     <!--/ Basic Bootstrap Table -->
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var tugasSwiper = new Swiper('.swiper-container-tugas', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination-tugas',
+                clickable: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '">' + (index + 1) + '</span>';
+                },
+            },
+        });
+
+        var materiSwiper = new Swiper('.swiper-container-materi', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination-materi',
+                clickable: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '">' + (index + 1) + '</span>';
+                },
+            },
+        });
+    });
+</script>
 <%- include('../partials/footer') %>
 

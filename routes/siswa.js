@@ -26,39 +26,13 @@ router.get('/', async function(req, res, next) {
         res.redirect('/logout')
       } else {
         res.render('siswa/dashboard', {
-          pages: 'Dashboard',
+          pages: 'dashboard',
           dataSenin: data_harisenin,
           dataSelasa: data_hariselasa,
           dataRabu: data_harirabu,
           dataKamis: data_harikamis,
           dataJumat: data_harijumat,
           dataSabtu: data_harisabtu,
-          nama: data_user[0].nama,
-          level_user: data_user[0].level_user,
-          photos: data_user[0].photos,
-          email: data_user[0].email
-        })
-      }
-    } else {
-      res.status(401).json({error: 'user tidak ada'})  
-    }
-  } catch (error) {
-    console.error(error)
-    res.status(501).json('error pada fungsi')
-  }
-});
-
-router.get('/tugas', async function(req, res, next) {
-  let id = req.session.userId
-  try {
-    let data_user = await siswa_model.getByID(id)
-    
-    if (data_user.length > 0) {
-      if (data_user[0].level_user != 'siswa') {
-        res.redirect('/logout')
-      } else {
-        res.render('siswa/tugas', {
-          pages: 'Dashboard',
           nama: data_user[0].nama,
           level_user: data_user[0].level_user,
           photos: data_user[0].photos,
@@ -94,7 +68,7 @@ router.get('/detail/(:mapelID)', async function(req, res, next) {
         res.redirect('/logout')
       } else {
         res.render('siswa/detail', {
-          pages: 'Detail',
+          pages: 'detail',
           dataPresensi: dataPresensi,
           dataMapel: data_mapel,
           hariIni: hariini,

@@ -34,9 +34,9 @@ router.get('/', async function(req, res, next) {
           res.redirect('/logout')
         } else {
           res.render('siswa/materi', {
-            pages: 'Materi',
+            pages: 'materi',
             nama: data_user[0].nama,
-            level: data_user[0].level_user,
+            level_user: data_user[0].level_user,
             photos: data_user[0].photos,
             email: data_user[0].email
           })

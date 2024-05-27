@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const multer = require('multer')
 const path = require('path')
 const fs = require('fs')
-const siswa_model = require('../models/siswa_model');
+const guru_model = require('../models/guru_model');
 const jadwal_model = require('../models/jadwal_model');
 
 const storage = multer.diskStorage({
@@ -17,19 +17,20 @@ const storage = multer.diskStorage({
     },
 });
   
-  const upload = multer({storage:storage})
+const upload = multer({storage:storage})
 
-router.get('/',  async function(req, res, next) {
-    let id = req.session.userId
+router.get('/', async function(req, res, next) {
+    let userId = req.session.userId
+    console.log(userId)
     try {
-    let data_user = await siswa_model.getByID(id)
-      
+    let data_user = await guru_model.getByID(userId)
+    console.log(data_user)
     if (data_user.length > 0) {
-        if (data_user[0].level_user != 'siswa') {
+        if (data_user[0].level_user != 'guru') {
             res.redirect('/logout')
         } else {
-            res.render('siswa/editProfile', {
-                pages: 'Edit Profile',
+            res.render('guru/editProfile', {
+                pages: 'profile',
                 nama: data_user[0].nama,
                 jenis_kelamin: data_user[0].jenis_kelamin,
                 tanggal_lahir: data_user[0].tanggal_lahir,
@@ -39,9 +40,9 @@ router.get('/',  async function(req, res, next) {
                 email: data_user[0].email,
             })
         }
-        } else {
-            res.status(401).json({error: 'user tidak ada'})  
-        }
+    } else {
+        res.status(401).json({error: 'user tidak ada'})  
+    }
     } catch (error) {
         console.error(error)
         res.status(501).json('error pada fungsi')
@@ -61,26 +62,26 @@ router.post('/', upload.single("photos"), async function(req, res){
       age--;
     }
     
-    if (age < 6) {
-      req.flash('messageError', ' Umur harus 6 tahun keatas !!');
-      return res.redirect('/register');
+    if (age < 30) {
+      req.flash('messageError', ' Umur harus 30 tahun keatas !!');
+      return res.redirect('/guru/editProfile');
     }
 
-    let cekEmailSiswa = await siswa_model.getByEmail(email)
+    let cekEmailGuru = await guru_model.getByEmail(email)
 
-    if(cekEmailSiswa.length > 0) {
+    if(cekEmailGuru.length > 0) {
       req.flash('messageError', 'Email sudah ada !!');
-      return res.redirect('/register');
+      return res.redirect('/guru/editProfile');
     }
     
     if (password.length < 8) {
       req.flash('messageError', ' Password harus terdiri dari minimal 8 karakter !!');
-      return res.redirect('/register');
+      return res.redirect('/guru/editProfile');
     }
 
     if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)) {
       req.flash('messageError', ' Password harus terdiri dari angka dan huruf saja !!');
-      return res.redirect('/register');
+      return res.redirect('/guru/editProfile');
     }
     
     let enskripsi = await bcrypt.hash(password, 10);
@@ -92,20 +93,20 @@ router.post('/', upload.single("photos"), async function(req, res){
       photos: req.file.filename,
       email,
       password: enskripsi,
-      level_user: 'siswa'
+      level_user: 'guru'
     };
-    let cek = siswa_model.Update(id, data);
+    let cek = guru_model.Update(id, data);
     if (cek) {
       req.flash('success', 'Berhasil Update !!');
-      res.redirect('/siswa/editProfile');
+      res.redirect('/guru/editProfile');
     } else {
       req.flash('error', 'Gagal Update !!');
-      res.redirect('/siswa/editProfile');
+      res.redirect('/guru/editProfile');
     }
   } catch (error) {
     console.error(error)
     req.flash('error', 'Error pada fungsi !!')
-    res.redirect('/editProfile')
+    res.redirect('/guru/editProfile')
   }
 })
 
