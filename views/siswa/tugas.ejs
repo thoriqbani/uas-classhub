@@ -2,6 +2,140 @@
 <%- include('../partials/navbar') %>
 <%- include('../partials/message') %>
 
+<style>
+    .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; 
+    background-color: rgba(0, 0, 0, 0.4); 
+    backdrop-filter: blur(5px); 
+}
 
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; 
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; 
+    max-width: 500px;
+}
+
+.closeBtn {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+</style>
+
+<div class="container">
+    <h1>Tugas</h1>
+    <div>
+        <label for="mapelSelect">Pilih Mata Pelajaran:</label>
+        <select id="mapelSelect">
+            <option value="">--Pilih Mata Pelajaran--</option>
+            <% for(var i=0; i < mapel_list.length; i++) {%>
+                <option value="<%= mapel_list[i].id %>">
+                    <%= mapel_list[i].nama_mapel %>
+                </option>
+            <% } %>
+        </select>
+        
+    </div>
+    <div id="tugasList" class="mt-3 row">
+        
+    </div>
+</div>
+
+<script>
+    document.getElementById('mapelSelect').addEventListener('change', function () {
+        let mapelId = this.value;
+        fetch(`/siswa/tugas/${mapelId}`)
+            .then(response => response.json())
+            .then(data => {
+                let tugasList = document.getElementById('tugasList');
+                tugasList.innerHTML = '';
+                if (data.length > 0) {
+                    data.forEach(tugas => {
+                        let card = document.createElement('div');
+                        card.className = 'col-md-4 mt-2';
+
+                        let cardInner = `
+                            <div class="content-wrapper">
+                                <div class="container-xxl flex-grow-1 container-p-y">
+                                    <div class="row mb-5">
+                                        <div class="card mb-4 mx-2" style="width: 20rem;">
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <span><b>${tugas.judul}</b></span>
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center">
+                                                    <p>Deskripsi: ${tugas.deskripsi}</p>
+                                                </li>
+                                                <li class="list-group-item d-flex align-items-center">
+                                                    <span><b>Deadline: ${tugas.tanggal_deadline} - ${tugas.waktu_deadline}</b></span>
+                                                </li>
+                                                <li class="list-group-item">
+                                                    <div class="d-flex justify-content-between">
+                                                        <a href="/upload/tugas_pdf/${tugas.file_tugas}" download="${tugas.judul}" class="btn btn-sm btn-primary me-2">Download tugas</a>
+                                                        <a href="/siswa/tugas/create/${tugas.id}" id="tambahTugasBtn" class="btn btn-primary">Tambah Tugas</a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        card.innerHTML = cardInner;
+                        tugasList.appendChild(card);
+                    });
+                } else {
+                    let noData = document.createElement('div');
+                    noData.className = 'col-12';
+                    noData.textContent = 'Tidak ada tugas untuk mata pelajaran ini.';
+                    tugasList.appendChild(noData);
+                }
+            })
+            .catch(error => console.error('Error:', error));
+    });
+
+    document.getElementById('tambahTugasBtn').addEventListener('click', function () {
+        document.getElementById('tambahTugasModal').style.display = 'block';
+    });
+
+    document.querySelector('.closeBtn').addEventListener('click', function () {
+        document.getElementById('tambahTugasModal').style.display = 'none';
+    });
+
+    window.onclick = function(event) {
+        let modal = document.getElementById('tambahTugasModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function toggleForm(tugasId) {
+        const form = document.getElementById(`form-${tugasId}`);
+        if (form.style.display === "none" || form.style.display === "") {
+            form.style.display = "block";
+        } else {
+            form.style.display = "none";
+        }
+    }
+</script>
 
 <%- include('../partials/footer') %>

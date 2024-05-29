@@ -1,0 +1,28 @@
+<!-- views/partials/tugasCard.ejs -->
+<div class="col-md-4 mt-2">
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row mb-5">
+                <div class="card mb-4 mx-2" style="width: 20rem;">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><b><%= tugas.judul %></b></span>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <p>Deskripsi: <%= tugas.deskripsi %></p>
+                        </li>
+                        <li class="list-group-item d-flex align-items-center">
+                            <span><b>Deadline: <%= tugas.tanggal_deadline %> - <%= tugas.waktu_deadline %></b></span>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between">
+                                <a href="/upload/tugas_pdf/<%= tugas.file_tugas %>" download="<%= tugas.judul %>" class="btn btn-sm btn-primary me-2">Download tugas</a>
+                                <button class="btn btn-primary tambahTugasBtn">Tambah Tugas</button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

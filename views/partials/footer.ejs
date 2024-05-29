@@ -15,7 +15,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="../soft/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
-<!-- Swiper JS -->
+<!-- Swipers JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
@@ -29,6 +29,33 @@
           navigation: {
               nextEl: '.swiper-button-next',
               prevEl: '.swiper-button-prev',
+          },
+          breakpoints: {
+              // Configure breakpoints if needed
+              640: {
+                  slidesPerView: 1,
+                  spaceBetween: 20,
+              },
+              768: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+              },
+              1024: {
+                  slidesPerView: 3,
+                  spaceBetween: 30,
+              },
+          },
+      });
+      const swipers = new Swiper('.swipers-container', {
+          slidesPerView: 3, // Show 3 slides at a time
+          spaceBetween: 30, // Space between slides in px
+          pagination: {
+              el: '.swipers-pagination',
+              clickable: true,
+          },
+          navigation: {
+              nextEl: '.swipers-button-next',
+              prevEl: '.swipers-button-prev',
           },
           breakpoints: {
               // Configure breakpoints if needed

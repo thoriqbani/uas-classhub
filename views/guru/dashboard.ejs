@@ -3,12 +3,21 @@
 <%- include('../partials/message') %>
 <style>
     .carousel-item {
-    display: flex;
-    justify-content: center;
-}
-.card {
-    flex: 0 0 auto;
-}
+        display: flex;
+        justify-content: center;
+    }
+    .card {
+        flex: 0 0 auto;
+    }
+    .swiper-pagination-bullet {
+        background: #007bff;
+        width: 12px;
+        height: 12px;
+        opacity: 1;
+    }
+    .swiper-pagination-bullet-active {
+        background: #0056b3;
+    }
 </style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -17,7 +26,10 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <!-- Basic Bootstrap Table -->
         <div class="row mb-5">
-            <div class="swiper-container swiper-container-tugas">
+            <div class="mt-3 px-3 mb-3">
+                <a>Tugas</a>
+            </div>
+            <div class="swiper-container">
                 <div class="swiper-wrapper">
                     <% for(var i = 0; i < tugasList.length; i++) { %>
                         <div class="swiper-slide">
@@ -55,16 +67,14 @@
                         </div>
                     <% } %>
                 </div>
-            
-                <!-- Add Pagination if needed -->
-                
-                
+                <!-- Add Pagination -->
+                <div class="swiper-pagination"></div>
             </div>
-            <div class="swiper-pagination swiper-pagination-tugas"></div>
         </div>
     </div>
     <!--/ Basic Bootstrap Table -->
 </div>
+
 <!-- Content wrapper -->
 <div class="content-wrapper">
     <!-- Content -->
@@ -73,12 +83,10 @@
         <!-- Basic Bootstrap Table -->
         <div class="row mb-5">
             <div class="mt-3 px-3 mb-3">
-                <!-- <a href="/tugas/create" class="btn btn-sm btn-primary">Tambah</a> -->
                 <a>Materi</a>
             </div>
-
             <div class="swiper-container">
-                <div class="swiper-wrapper swiper-container-materi">
+                <div class="swiper-wrapper">
                     <% for(var i = 0; i < materiList.length; i++) { %>
                         <div class="swiper-slide">
                             <div class="card mb-4 mx-2" style="width: 20rem;">
@@ -114,42 +122,12 @@
                         </div>
                     <% } %>
                 </div>
-            
-                <!-- Add Pagination if needed -->
-                <div class="swiper-pagination swiper-pagination-materi"></div>
-            
-                
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </div>
     <!--/ Basic Bootstrap Table -->
 </div>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var tugasSwiper = new Swiper('.swiper-container-tugas', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: {
-                el: '.swiper-pagination-tugas',
-                clickable: true,
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '">' + (index + 1) + '</span>';
-                },
-            },
-        });
 
-        var materiSwiper = new Swiper('.swiper-container-materi', {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: {
-                el: '.swiper-pagination-materi',
-                clickable: true,
-                renderBullet: function (index, className) {
-                    return '<span class="' + className + '">' + (index + 1) + '</span>';
-                },
-            },
-        });
-    });
-</script>
 <%- include('../partials/footer') %>
 

@@ -59,9 +59,11 @@
           font-size: 14px;
           color: #666;
         }
+        .kebawah{
+            margin-top: 250px;
+        }
     </style>
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
-      <!-- Sidebar Start -->
         <div class="sidenav-header">
           <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
           <a class="navbar-brand m-0" href="https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html" target="_blank">
@@ -136,106 +138,51 @@
         
       </aside>
       <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-          <!-- Navbar start -->
-          <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none bg-secondary border-radius-xl" id="navbarBlur" navbar-scroll="true">
-            <div class="container-fluid py-1 px-3">
-              
-              <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-                <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-                  <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                      <div class="sidenav-toggler-inner">
-                        <i class="sidenav-toggler-line"></i>
-                        <i class="sidenav-toggler-line"></i>
-                        <i class="sidenav-toggler-line"></i>
-                      </div>
-                    </a>
-                  </li>
-                </div>
-                <ul class="navbar-nav  justify-content-end">
-                  <li class="nav-item dropdown pe-2 d-flex align-items-center">
-                    <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-lines-fill" viewBox="0 0 16 16">
-                        <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z"/>
-                      </svg>
-                    </a>
-                    <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                      <li class="mb-2">
-                        <a class="dropdown-item border-radius-md" href="/siswa/editProfile">
-                          <div class="d-flex flex-column align-items-center py-1">
-                            <div class="my-auto">
-                              <img src="/images/foto_user/<%= photos %>"  class="avatar avatar-sm mb-3">
-  
-                            </div>
-                            <div class="d-flex flex-column justify-content-center text-center">
-                              <h6 class="text-sm font-weight-normal mb-1">
-                                <span class="font-weight-bold"><%= nama %></span>
-                              </h6>
-                              <p class="text-xs text-secondary mb-0">
-                                <%= email %>
-                              </p>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
+        <!-- Navbar -->
+        <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none bg-secondary border-radius-xl" id="navbarBlur" navbar-scroll="true">
+          <div class="container-fluid py-1 px-3">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+                <li class="breadcrumb-item text-sm"><a class="warna-putih" href="javascript:;">Pages</a></li>
+                <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><%= pages %></li>
+              </ol>
+              <h6 class="font-weight-bolder mb-0"><%= pages %></h6>
+            </nav>
+            <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+              <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+                
               </div>
             </div>
-          </nav>
-          <!-- End Navbar -->
+          </div>
+          
+        </nav>
+        <!-- End Navbar -->
     <%- include('../partials/message') %>
-    <div class="content-wrapper">
-        <!-- Content -->
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms/</span> Presensi</h4>
-
-            <!-- Parent Row -->
-            <div class="row">
-                <!-- Left Section -->
-                <div class="col-md-6">
-                    <div class="card mb-4 " style="border:1px dotted  grey;">
-                        <div class="card-header d-flex align-items-center justify-content-between">
-                            <h4 class="mb-0"><%= dataMapel[0].mapel %></h4>
-                            
-                            <small class="text-muted float-end"></small>
-                        </div>
-                        <!-- Basic Bootstrap Table -->
-                        <div class="readUpdate">
-                            <form action="/siswa/presensi/presensi" method="post">
-                            <div class="d-flex flex-wrap">
-                                <div class="card mb-2 mx-2" style="width: 40rem;">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item">
-                                            <a>Nama Guru : <%= dataMapel[0].nama %></a>
-                                            
-                                        </li>
-                                        <li class="list-group-item"><a>Jadwal : <%= dataMapel[0].hari %>, <%= dataMapel[0].jam_awal %> - <%= dataMapel[0].jam_akhir %></a>
-                                            
-                                        </li>
-                                        <li class="list-group-item">
-                                            <div class="row justify-content-start mt-4">
-                                                <div class="col-sm-10">
-                                                    <% if(jamSekarang<dataMapel[0].jam_awal || jamSekarang>dataMapel[0].jam_akhir || hariIni!=dataMapel[0].hari) { %>
-                                                        <button type="submit" class="btn" disabled>Presensi</button>
-                                                    <% } else { %>
-                                                        <input hidden name="mapel_id" value="<%= dataMapel[0].mapel_id %>">
-                                                        <button type="submit" class="btn btn-primary">Presensi</button>
-                                                    <% } %>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-
+    
+    <div class="kebawah container">
+        <div class="row mt-lg-n15 mt-md-n11 mt-n10">
+            <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+                <div class="card z-index-0">
+                    <div class="card-header text-center pt-4">
+                        <h5>Tambah Pengumpulan Tugas</h5>
+                    </div>
+                    <div class="card-body">
+                        <form role="form text-left" action="/siswa/tugas/create" method="post"
+                            enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <input type="file" class="form-control" id="file_tugas" name="file_tugas"
+                                    placeholder="File Tugas" aria-label="File Tugas" aria-describedby="email-addon">
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Tambah</button>
                             </div>
                         </form>
-                        </div>
-                        <!--/ Basic Bootstrap Table -->
                     </div>
                 </div>
             </div>
+        </div>
+      </div>
+    
 <!--   Core JS Files   -->
 <script src="../../soft/assets/js/core/popper.min.js"></script>
 <script src="../../soft/assets/js/core/bootstrap.min.js"></script>

@@ -13,9 +13,9 @@ class materi_model {
         });
     }
 
-    static async getByUserID(user_id) {
+    static async getByMapel(mapel_id) {
         return new Promise((resolve, reject) => {
-            connect.query('SELECT * FROM materi WHERE user_id = ? ORDER BY id DESC', [user_id], (err, rows) => {
+            connect.query('SELECT * FROM materi WHERE mapel_id = ? ORDER BY id DESC', [mapel_id], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {

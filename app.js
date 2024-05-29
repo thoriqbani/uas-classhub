@@ -18,6 +18,10 @@ var tugasGuruRouter = require('./routes/tugasGuru');
 var materiGuruRouter = require('./routes/materiGuru');
 var editProfileGuruRouter = require('./routes/editProfileGuru');
 
+// app.post('/partials/tugasCard.ejs', (req, res) => {
+//   res.render('partials/tugasCard', { tugas: req.body.tugas });
+// });
+
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
