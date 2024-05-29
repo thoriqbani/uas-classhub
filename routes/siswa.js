@@ -59,7 +59,7 @@ router.get('/detail/(:mapelID)', async function(req, res, next) {
     let today = new Date();
     let hours = today.getHours();
     let minutes = today.getMinutes();
-    const waktu = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+    const waktu = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes
     console.log(waktu)
     let hariini = getDayName(today.getDay())
     console.log(hariini)

@@ -58,8 +58,20 @@ class tugas_model {
                 } else {
                     resolve(rows);
                 }
-            });
-        });
+            })
+        })
+    }
+
+    static async getByTugasId(tugas_id) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT waktu_deadline, id, DATE_FORMAT(tanggal_deadline, "%Y-%m-%d") AS tanggal_deadline, mapel_id FROM tugas WHERE id = ? ORDER BY id DESC', tugas_id, (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
     }
 }
 

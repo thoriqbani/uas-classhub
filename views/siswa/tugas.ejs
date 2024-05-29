@@ -47,16 +47,14 @@
         <label for="mapelSelect">Pilih Mata Pelajaran:</label>
         <select id="mapelSelect">
             <option value="">--Pilih Mata Pelajaran--</option>
-            <% for(var i=0; i < mapel_list.length; i++) {%>
+            <% for(var i=0; i < mapel_list.length; i++) { %>
                 <option value="<%= mapel_list[i].id %>">
                     <%= mapel_list[i].nama_mapel %>
                 </option>
             <% } %>
         </select>
-        
     </div>
     <div id="tugasList" class="mt-3 row">
-        
     </div>
 </div>
 
@@ -73,6 +71,17 @@
                         let card = document.createElement('div');
                         card.className = 'col-md-4 mt-2';
 
+                        let statusText = "Belum Mengumpulkan";
+                        if (tugas.pengumpulan_status === "sudah") {
+                            statusText = "Sudah Mengumpulkan";
+                        } else if (tugas.pengumpulan_status === "telat") {
+                            statusText = "Telat Mengumpulkan";
+                        }
+
+                        let buttonHtml = tugas.pengumpulan_status ? 
+                            `<a href="/siswa/tugas/edit/${tugas.id}" class="btn btn-primary">Edit Tugas</a>` :
+                            `<a href="/siswa/tugas/create/${tugas.id}" class="btn btn-primary">Tambah Tugas</a>`;
+
                         let cardInner = `
                             <div class="content-wrapper">
                                 <div class="container-xxl flex-grow-1 container-p-y">
@@ -88,10 +97,13 @@
                                                 <li class="list-group-item d-flex align-items-center">
                                                     <span><b>Deadline: ${tugas.tanggal_deadline} - ${tugas.waktu_deadline}</b></span>
                                                 </li>
+                                                <li class="list-group-item d-flex align-items-center">
+                                                    <span><b>Status: ${statusText}</b></span>
+                                                </li>
                                                 <li class="list-group-item">
                                                     <div class="d-flex justify-content-between">
                                                         <a href="/upload/tugas_pdf/${tugas.file_tugas}" download="${tugas.judul}" class="btn btn-sm btn-primary me-2">Download tugas</a>
-                                                        <a href="/siswa/tugas/create/${tugas.id}" id="tambahTugasBtn" class="btn btn-primary">Tambah Tugas</a>
+                                                        ${buttonHtml}
                                                     </div>
                                                 </li>
                                             </ul>
@@ -112,30 +124,6 @@
             })
             .catch(error => console.error('Error:', error));
     });
-
-    document.getElementById('tambahTugasBtn').addEventListener('click', function () {
-        document.getElementById('tambahTugasModal').style.display = 'block';
-    });
-
-    document.querySelector('.closeBtn').addEventListener('click', function () {
-        document.getElementById('tambahTugasModal').style.display = 'none';
-    });
-
-    window.onclick = function(event) {
-        let modal = document.getElementById('tambahTugasModal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
-        }
-    }
-
-    function toggleForm(tugasId) {
-        const form = document.getElementById(`form-${tugasId}`);
-        if (form.style.display === "none" || form.style.display === "") {
-            form.style.display = "block";
-        } else {
-            form.style.display = "none";
-        }
-    }
 </script>
 
 <%- include('../partials/footer') %>
