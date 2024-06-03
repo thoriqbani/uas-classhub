@@ -46,11 +46,11 @@ const upload = multer({ storage: storage });
 
 router.post('/create', upload.single('file_tugas'), async (req, res) => {
     try {
-        const { judul, deskripsi, mapel_id } = req.body;
+        const { judul, deskripsi, mapel_id, tanggal_deadline, waktu_deadline } = req.body;
         const file_tugas = req.file.filename;
-        const today = new Date();
-        const tanggal_deadline = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        const waktu_deadline = today.getHours() + ':' + today.getMinutes();
+        // const today = new Date();
+        // const tanggal_deadline = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        // const waktu_deadline = today.getHours() + ':' + today.getMinutes();
         const data = {
             judul,
             deskripsi,

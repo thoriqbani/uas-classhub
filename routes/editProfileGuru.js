@@ -67,9 +67,9 @@ router.post('/', upload.single("photos"), async function(req, res){
       return res.redirect('/guru/editProfile');
     }
 
-    let cekEmailGuru = await guru_model.getByEmail(email)
+    let cekEmailGuru = await guru_model.getByID(id)
 
-    if(cekEmailGuru.length > 0) {
+    if(cekEmailGuru == email) {
       req.flash('messageError', 'Email sudah ada !!');
       return res.redirect('/guru/editProfile');
     }
@@ -92,7 +92,6 @@ router.post('/', upload.single("photos"), async function(req, res){
       no_hp,
       photos: req.file.filename,
       email,
-      password: enskripsi,
       level_user: 'guru'
     };
     let cek = guru_model.Update(id, data);

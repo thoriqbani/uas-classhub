@@ -6,6 +6,7 @@ const presensi_model = require('../models/presensi_model');
 
 router.get('/', async function(req, res, next) {
     let id = req.session.userId
+    
     try {
       let data_user = await siswa_model.getByID(id)
       

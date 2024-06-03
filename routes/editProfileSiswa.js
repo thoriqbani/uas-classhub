@@ -50,7 +50,7 @@ router.get('/',  async function(req, res, next) {
 
 router.post('/', upload.single("photos"), async function(req, res){
     let id = req.session.userId
-    let { nama, jenis_kelamin, tanggal_lahir, no_hp, email, password } = req.body;
+    let { nama, jenis_kelamin, tanggal_lahir, no_hp, email} = req.body;
   try {
     let today = new Date();
     let birthDate = new Date(tanggal_lahir);
@@ -63,27 +63,26 @@ router.post('/', upload.single("photos"), async function(req, res){
     
     if (age < 6) {
       req.flash('messageError', ' Umur harus 6 tahun keatas !!');
-      return res.redirect('/register');
+      return res.redirect('/siswa/editProfile');
     }
 
-    let cekEmailSiswa = await siswa_model.getByEmail(email)
+    let cekEmailSiswa = await siswa_model.getByID(id)
 
-    if(cekEmailSiswa.length > 0) {
+    if(cekEmailSiswa == email) {
       req.flash('messageError', 'Email sudah ada !!');
-      return res.redirect('/register');
+      return res.redirect('/siswa/editProfile');
     }
     
     if (password.length < 8) {
       req.flash('messageError', ' Password harus terdiri dari minimal 8 karakter !!');
-      return res.redirect('/register');
+      return res.redirect('/siswa/editProfile');
     }
 
     if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)) {
       req.flash('messageError', ' Password harus terdiri dari angka dan huruf saja !!');
-      return res.redirect('/register');
+      return res.redirect('/siswa/editProfile');
     }
     
-    let enskripsi = await bcrypt.hash(password, 10);
     let data = {
       nama,
       jenis_kelamin,
@@ -91,7 +90,6 @@ router.post('/', upload.single("photos"), async function(req, res){
       no_hp,
       photos: req.file.filename,
       email,
-      password: enskripsi,
       level_user: 'siswa'
     };
     let cek = siswa_model.Update(id, data);
@@ -105,7 +103,7 @@ router.post('/', upload.single("photos"), async function(req, res){
   } catch (error) {
     console.error(error)
     req.flash('error', 'Error pada fungsi !!')
-    res.redirect('/editProfile')
+    res.redirect('/siswa/editProfile')
   }
 })
 

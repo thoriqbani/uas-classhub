@@ -46,8 +46,8 @@ class guru_model {
                 } else {
                     resolve(rows);
                 }
-            });
-        });
+            })
+        })
     }
 
     static async getByEmail(email) {

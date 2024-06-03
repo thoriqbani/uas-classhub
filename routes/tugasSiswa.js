@@ -144,8 +144,24 @@ const upload = multer({ storage: storage });
           let hours = today.getHours();
           let minutes = today.getMinutes();
           const waktu_pengumpulan = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes
+          console.log(tanggal_pengumpulan)
+          console.log(waktu_pengumpulan)
           const deadline = await tugas_model.getByTugasId(tugas_id)
-          if(deadline[0].tanggal_deadline < tanggal_pengumpulan && deadline[0].waktu_deadline < waktu_pengumpulan) {
+          console.log(deadline)
+          if(tanggal_pengumpulan > deadline[0].tanggal_deadline  && waktu_pengumpulan > deadline[0].waktu_deadline) {
+            const data = {
+              file_tugas: file_tugas,
+              status:'telat',
+              tanggal_pengumpulan: tanggal_pengumpulan,
+              waktu_pengumpulan: waktu_pengumpulan,
+              tugas_id: tugas_id,
+              user_id: req.session.userId,
+              mapel_id: mapel_id,
+            };
+            await pengumpulan_model.store(data);
+            console.log("File uploaded:", req.file.filename);
+            req.flash('success','Anda Telat Mengumpulkan')
+          } else if (tanggal_pengumpulan > deadline[0].tanggal_deadline) {
             const data = {
               file_tugas: file_tugas,
               status:'telat',

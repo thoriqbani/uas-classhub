@@ -48,19 +48,19 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-router.get('/detail/(:mapelID)', async function(req, res, next) {
-  let mapelID = req.params.mapelID
+router.get('/detail/(:presensiId)', async function(req, res, next) {
+  let presensiID = req.params.presensiId
   let id = req.session.userId
   try {
     let data_user = await siswa_model.getByID(id)
-    let data_mapel = await jadwal_model.getByID(mapelID)
-    let dataPresensi = await presensi_model.getPresensi(id)
+    let data_mapel = await jadwal_model.getByID(presensiID)
+    let dataPresensi = await presensi_model.getPresensiByPresensiId(id)
     console.log(data_mapel)
     let today = new Date();
     let hours = today.getHours();
     let minutes = today.getMinutes();
     const waktu = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes
-    console.log(waktu)
+    
     let hariini = getDayName(today.getDay())
     console.log(hariini)
     if (data_user.length > 0) {
