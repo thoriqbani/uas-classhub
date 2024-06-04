@@ -161,7 +161,7 @@ const upload = multer({ storage: storage });
             await pengumpulan_model.store(data);
             console.log("File uploaded:", req.file.filename);
             req.flash('success','Anda Telat Mengumpulkan')
-          } else if (tanggal_pengumpulan > deadline[0].tanggal_deadline) {
+          } else if (tanggal_pengumpulan == deadline[0].tanggal_deadline && tanggal_pengumpulan > deadline[0].tanggal_deadline) {
             const data = {
               file_tugas: file_tugas,
               status:'telat',

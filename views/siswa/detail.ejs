@@ -232,9 +232,33 @@
                             </div>
                         </form>
                         </div>
-                        <!--/ Basic Bootstrap Table -->
+                      </div>
                     </div>
-                </div>
+                    <div class="container mt-5">
+                      <h1>Riwayat Presensi</h1>
+                      <table class="table table-striped">
+                          <thead>
+                              <tr>
+                                  <th>No</th>
+                                  <th>Nama</th>
+                                  <th>Tanggal Presensi</th>
+                                  <th>Jam Presensi</th>
+                                  <th>Status</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <% for (let i = 0; i < dataPresensi.length; i++) { %>
+                                  <tr>
+                                      <td><%= (i+1) %></td>
+                                      <td><%= dataPresensi[i].nama %></td>
+                                      <td><%= dataPresensi[i].tanggal_presensi %></td>
+                                      <td><%= dataPresensi[i].jam_presensi %></td>
+                                      <td><%= dataPresensi[i].status %></td>
+                                  </tr>
+                              <% } %>
+                          </tbody>
+                      </table>
+                  </div>
             </div>
 <!--   Core JS Files   -->
 <script src="../../soft/assets/js/core/popper.min.js"></script>

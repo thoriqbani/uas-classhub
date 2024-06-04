@@ -26,6 +26,19 @@ class siswa_model {
         })
     }
 
+    static async changePassword(password, email){
+        return new Promise((resolve, reject) =>{
+            connect.query('UPDATE user set password = ? where email = ? ', [password, email], function(err, result){
+                if(err){
+                    reject(err)
+                    console.log(err)
+                } else {
+                    resolve(result);
+                }
+            })
+        })
+    }
+
     static async login(email){
         return new Promise((resolve, reject) => {
             connect.query('select * from user where email = ?', email, function(err, rows){

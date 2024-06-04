@@ -54,7 +54,8 @@ router.get('/detail/(:presensiId)', async function(req, res, next) {
   try {
     let data_user = await siswa_model.getByID(id)
     let data_mapel = await jadwal_model.getByID(presensiID)
-    let dataPresensi = await presensi_model.getPresensiByPresensiId(id)
+    let dataPresensi = await presensi_model.getPresensiByPresensiAndUserId(presensiID, id)
+    // let dataPresensi = await presensi_model.getPresensiByPresensiId(id)
     console.log(data_mapel)
     let today = new Date();
     let hours = today.getHours();

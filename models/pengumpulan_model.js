@@ -27,6 +27,18 @@ class pengumpulan_model {
         });
     }
 
+    static async getByUserAndTugasId(tugas_id) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT * FROM pengumpulan join user on pengumpulan.user_id = user.id WHERE tugas_id = ?', [tugas_id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     static async getByUserAndMapel(user_id, mapel_id) {
         return new Promise((resolve, reject) => {
             connect.query('SELECT * FROM pengumpulan WHERE user_id = ? AND mapel_id = ?', [user_id, mapel_id], (err, rows) => {

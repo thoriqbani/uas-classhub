@@ -7,6 +7,7 @@ const fs = require('fs')
 const guru_model = require('../models/guru_model');
 const tugas_model = require('../models/tugas_model');
 const materi_model = require('../models/materi_model');
+const pengumpulan_model = require('../models/pengumpulan_model');
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -50,6 +51,70 @@ router.get('/', async (req, res) => {
         res.status(501).json('error pada fungsi');
     }
 });
+
+router.get('/detail/tugas/(:tugasId)', async (req, res) => {
+    try {
+        let tugasId = req.params.tugasId
+        console.log(tugasId)
+        let userId = req.session.userId;
+        let data_user = await guru_model.getByID(userId);
+        let pengumpulanList = await pengumpulan_model.getByUserAndTugasId(tugasId);
+        let materiList = await materi_model.getAllByUserId(userId);
+        // const tanggal = tugasList.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+        if (data_user.length > 0) {
+            if (data_user[0].level_user != 'guru') {
+                res.redirect('/logout');
+            } else {
+                res.render('guru/detail_tugas', {
+                    pages: 'Detail Tugas',
+                    pengumpulanList: pengumpulanList,
+                    materiList: materiList,
+                    nama: data_user[0].nama,
+                    level_user: data_user[0].level_user,
+                    photos: data_user[0].photos,
+                    email: data_user[0].email
+                });
+            }
+        } else {
+            res.status(401).json({ error: 'user tidak ada' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(501).json('error pada fungsi');
+    }
+});
+
+// router.get('/detail/materi/(:id)', async (req, res) => {
+//     try {
+//         let userId = req.session.userId;
+//         let data_user = await guru_model.getByID(userId);
+//         let tugasList = await tugas_model.getAllByUserId(userId);
+//         let materiList = await materi_model.getAllByUserId(userId);
+//         // const tanggal = tugasList.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
+//         if (data_user.length > 0) {
+//             if (data_user[0].level_user != 'guru') {
+//                 res.redirect('/logout');
+//             } else {
+//                 res.render('guru/detail_materi', {
+//                     pages: 'detail materi',
+//                     tugasList: tugasList,
+//                     materiList: materiList,
+//                     nama: data_user[0].nama,
+//                     level_user: data_user[0].level_user,
+//                     photos: data_user[0].photos,
+//                     email: data_user[0].email
+//                 });
+//             }
+//         } else {
+//             res.status(401).json({ error: 'user tidak ada' });
+//         }
+//     } catch (error) {
+//         console.error(error);
+//         res.status(501).json('error pada fungsi');
+//     }
+// });
 
 
 

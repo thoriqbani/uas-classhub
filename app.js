@@ -17,6 +17,7 @@ var guruRouter = require('./routes/guru');
 var tugasGuruRouter = require('./routes/tugasGuru');
 var materiGuruRouter = require('./routes/materiGuru');
 var editProfileGuruRouter = require('./routes/editProfileGuru');
+var adminRouter = require('./routes/admin');
 
 // app.post('/partials/tugasCard.ejs', (req, res) => {
 //   res.render('partials/tugasCard', { tugas: req.body.tugas });
@@ -61,6 +62,7 @@ app.use('/siswa/presensi', presensiRouter);
 app.use('/siswa/tugas', tugasSiswaRouter);
 app.use('/siswa/materi', materiSiswaRouter);
 app.use('/siswa/editProfile', editProfileSiswaRouter);
+app.use('/admin', adminRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));
