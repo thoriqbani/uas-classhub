@@ -8,7 +8,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../../soft/assets/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../../soft/assets/img/favicon.png">
     <title>
-        Soft UI Dashboard by Creative Tim
+        ClassHub
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -194,7 +194,7 @@
             <!-- Parent Row -->
             <div class="row">
                 <!-- Left Section -->
-                <div class="col-md-6">
+                <div class="col-md-5">
                     <div class="card mb-4 " style="border:1px dotted  grey;">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h4 class="mb-0"><%= dataMapel[0].mapel %></h4>
@@ -234,31 +234,41 @@
                         </div>
                       </div>
                     </div>
-                    <div class="container mt-5">
-                      <h1>Riwayat Presensi</h1>
-                      <table class="table table-striped">
-                          <thead>
-                              <tr>
-                                  <th>No</th>
-                                  <th>Nama</th>
-                                  <th>Tanggal Presensi</th>
-                                  <th>Jam Presensi</th>
-                                  <th>Status</th>
-                              </tr>
-                          </thead>
-                          <tbody>
-                              <% for (let i = 0; i < dataPresensi.length; i++) { %>
+                    <!-- Right Section -->
+                    <div class="col-md-7">
+                      <div class="card mb-4" style="border:1px dotted  grey;">
+                        <div class="container">
+                          <div class="card-header">
+                              <h5 class="mb-0">History Presensi</h5>
+                          </div>
+                          <div class="table-responsive text-nowrap">
+                            <table class="table table-striped">
+                              <thead>
                                   <tr>
-                                      <td><%= (i+1) %></td>
-                                      <td><%= dataPresensi[i].nama %></td>
-                                      <td><%= dataPresensi[i].tanggal_presensi %></td>
-                                      <td><%= dataPresensi[i].jam_presensi %></td>
-                                      <td><%= dataPresensi[i].status %></td>
+                                      <th>No</th>
+                                      <th>Nama</th>
+                                      <th>Waktu Presensi</th>
+                                      
+                                      <th>Status</th>
                                   </tr>
-                              <% } %>
-                          </tbody>
-                      </table>
+                              </thead>
+                              <tbody>
+                                  <% for (let i = 0; i < dataPresensi.length; i++) { %>
+                                      <tr>
+                                          <td><%= (i+1) %></td>
+                                          <td><%= dataPresensi[i].nama %></td>
+                                          <td><%= dataPresensi[i].tanggal_presensi %> <%= dataPresensi[i].jam_presensi %></td>
+                                          <td><%= dataPresensi[i].jam_presensi %></td>
+                                          <td><%= dataPresensi[i].status %></td>
+                                      </tr>
+                                  <% } %>
+                              </tbody>
+                          </table>
+                              </div>
+                      </div>
+                    </div>
                   </div>
+                    
             </div>
 <!--   Core JS Files   -->
 <script src="../../soft/assets/js/core/popper.min.js"></script>
