@@ -1,0 +1,44 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navbarAdmin') %>
+<%- include('../partials/message') %>
+    <div class="container mt-4">
+        <h1>Tambah Jadwal</h1>
+        <form action="/admin/jadwal/create" method="POST">
+            <div class="form-group">
+                <label for="hari">Hari:</label>
+                <input type="text" id="hari" name="hari" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="jam_awal">Jam Awal:</label>
+                <input type="time" id="jam_awal" name="jam_awal" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="jam_akhir">Jam Akhir:</label>
+                <input type="time" id="jam_akhir" name="jam_akhir" class="form-control" required>
+            </div>
+            <label for="mapel_id">User ID:</label>
+            <div class="form-group">
+                <select id="" name="user_id">
+                    <option>--Pilih Guru--</option>
+                    <% for(var i=0; i < user_list.length; i++) { %>
+                    <option value="<%= user_list[i].id %>">
+                        <%= user_list[i].nama %>
+                    </option>
+                    <% } %>
+                </select>
+            </div>
+            <label for="mapel_id">Mapel ID:</label>
+            <div class="form-group">
+                <select id="" name="mapel_id">
+                    <option>--Pilih Mapel--</option>
+                    <% for(var i=0; i < pelajaran_list.length; i++) { %>
+                        <option value="<%= pelajaran_list[i].id %>">
+                            <%= pelajaran_list[i].nama_mapel %>
+                        </option>
+                    <% } %>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah Jadwal</button>
+        </form>
+    </div>
+<%- include('../partials/footer') %>
