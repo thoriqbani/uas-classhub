@@ -188,90 +188,83 @@
     <%- include('../partials/message') %>
       <div class="content-wrapper">
         <!-- Content -->
-        <div class="container-xxl flex-grow-1 container-p-y">
-          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span>
-            <%= pages %>
-          </h4>
-          <div class="kebawah container">
-            <div class="row mt-lg-n15 mt-md-n11 mt-n10">
-              <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
-                <div class="card z-index-0">
-                  <div class="card-header text-center pt-4">
-                    <h5>Update Tugas</h5>
-                  </div>
-                  <div class="card-body">
-                    <form role="form text-left" action="/guru/detail/tugas/update/<%= tugasList[0].id %>" method="post"
-                      enctype="multipart/form-data">
-                      <div class="mb-3">
-                        <p>Judul</p>
-                        <input type="text" class="form-control" id="judul" name="judul"
-                          placeholder="<%= tugasList[0].judul %>" aria-label="Judul" aria-describedby="email-addon">
-                      </div>
-                      <input type="text" class="form-control" id="mapel_id" name="mapel_id"
-                        value="<%= tugasList[0].mapel_id %>" hidden>
-                      <div class="mb-3">
-                        <p>Deskripsi</p>
-                        <input type="text" class="form-control" id="deskripsi" name="deskripsi"
-                          placeholder="<%= tugasList[0].deskripsi %>" aria-label="Deskripsi"
-                          aria-describedby="email-addon">
-                      </div>
-                      <div class="mb-3">
-                        <p>File Tugas</p>
-                        <input type="file" class="form-control" id="file_tugas" name="file_tugas"
-                          placeholder="File Tugas" aria-label="File Tugas" aria-describedby="email-addon">
-                      </div>
-                      <div class="mb-3">
-                        <p>Tanggal Deadline</p>
-                        <input type="date" class="form-control" id="tanggal_deadline" name="tanggal_deadline"
-                          placeholder="Tanggal Deadline" aria-label="deadline" aria-describedby="email-addon">
-                      </div>
-                      <div class="mb-3">
-                        <p>Waktu Deadline</p>
-                        <input type="time" class="form-control" id="waktu_deadline" name="waktu_deadline"
-                          placeholder="Waktu Deadline" aria-label="deadline" aria-describedby="email-addon">
-                      </div>
-                      <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Update</button>
-                      </div>
-                    </form>
+        <div class="container-fluid flex-grow-1 container-p-y">
+          <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> <%= pages %></h4>
+          
+          <div class="row">
+            <!-- Form Column -->
+            <div class="col-lg-6 col-md-12 mb-4">
+              <div class="card z-index-0">
+                <div class="card-header text-center pt-4">
+                  <h5>Update Tugas</h5>
+                </div>
+                <div class="card-body">
+                  <form role="form text-left" action="/guru/detail/tugas/update/<%= tugasList[0].id %>" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                      <label for="judul" class="form-label">Judul</label>
+                      <input type="text" class="form-control" id="judul" name="judul" placeholder="<%= tugasList[0].judul %>" aria-label="Judul">
+                    </div>
+                    <input type="hidden" id="mapel_id" name="mapel_id" value="<%= tugasList[0].mapel_id %>">
+                    <div class="mb-3">
+                      <label for="deskripsi" class="form-label">Deskripsi</label>
+                      <input type="text" class="form-control" id="deskripsi" name="deskripsi" placeholder="<%= tugasList[0].deskripsi %>" aria-label="Deskripsi">
+                    </div>
+                    <div class="mb-3">
+                      <label for="file_tugas" class="form-label">File Tugas</label>
+                      <input type="file" class="form-control" id="file_tugas" name="file_tugas" aria-label="File Tugas">
+                    </div>
+                    <div class="mb-3">
+                      <label for="tanggal_deadline" class="form-label">Tanggal Deadline</label>
+                      <input type="date" class="form-control" id="tanggal_deadline" name="tanggal_deadline" aria-label="Tanggal Deadline">
+                    </div>
+                    <div class="mb-3">
+                      <label for="waktu_deadline" class="form-label">Waktu Deadline</label>
+                      <input type="time" class="form-control" id="waktu_deadline" name="waktu_deadline" aria-label="Waktu Deadline">
+                    </div>
+                    <div class="text-center">
+                      <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Update</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+        
+            <!-- Detail Column -->
+            <div class="col-lg-6 col-md-12">
+              <div class="card z-index-0">
+                <div class="card-header text-center pt-4">
+                  <h5>Detail Tugas</h5>
+                </div>
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>Nama</th>
+                          <th>File Tugas</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for (let i = 0; i < pengumpulanList.length; i++) { %>
+                          <tr>
+                            <td><%= (i + 1) %></td>
+                            <td><%= pengumpulanList[i].nama %></td>
+                            <td><a href="/upload/tugas_pdf/<%= pengumpulanList[i].file_tugas %>" download="" target="_blank">Download</a></td>
+                            <td><%= pengumpulanList[i].status %></td>
+                          </tr>
+                        <% } %>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <!-- Parent Row -->
-          <div class="row">
-            <div class="container mt-5">
-              <h1>Detail Tugas</h1>
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>File Tugas</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% for (let i=0; i < pengumpulanList.length; i++) { %>
-                    <tr>
-                      <td>
-                        <%= (i+1) %>
-                      </td>
-                      <td>
-                        <%= pengumpulanList[i].nama %>
-                      </td>
-                      <td><a href="/upload/tugas_pdf/<%= pengumpulanList[i].file_tugas %>" download=""
-                          target="_blank">Download</a></td>
-                      <td>
-                        <%= pengumpulanList[i].status %>
-                      </td>
-                    </tr>
-                    <% } %>
-                </tbody>
-              </table>
-            </div>
-          </div>
+        </div>
+        
+        
           <!--   Core JS Files   -->
           <script src="../soft/assets/js/core/popper.min.js"></script>
           <script src="../soft/assets/js/core/bootstrap.min.js"></script>
