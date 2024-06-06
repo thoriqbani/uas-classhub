@@ -10,29 +10,46 @@
 
       <div class="kebawah container">
         <div class="row mt-lg-n15 mt-md-n11 mt-n10">
-          <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+          <div class="col-xl-5 col-lg-6 col-md-8 mx-auto">
             <div class="card z-index-0">
               <div class="card-header text-center pt-4">
                 <h5>Tambah Materi</h5>
               </div>
               <div class="card-body">
                 <form role="form text-left" action="/guru/materi/create" method="post" enctype="multipart/form-data">
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="judul" name="judul" placeholder="Judul"
-                      aria-label="Judul" aria-describedby="email-addon">
+
+                  <div class="row mb-3">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0">Judul</h6>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" id="judul" name="judul" class="form-control" required>
+                    </div>
                   </div>
+
                   <input type="text" class="form-control" id="mapel_id" name="mapel_id"
                     value="<%= dataMapel[0].mapel_id %>" hidden>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" id="deskripsi" name="deskripsi" placeholder="Deskripsi"
-                      aria-label="Deskripsi" aria-describedby="email-addon">
+
+                  <div class="row mb-3">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0">Deskripsi</h6>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" id="deskripsi" name="deskripsi" class="form-control" required>
+                    </div>
                   </div>
-                  <div class="mb-3">
-                    <input type="file" class="form-control" id="file_tugas" name="file_tugas" placeholder="File Tugas"
-                      aria-label="File Tugas" aria-describedby="email-addon">
+
+                  <div class="row mb-3">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0">File</h6>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="file" id="file_materi" name="file_materi" class="form-control" required>
+                    </div>
                   </div>
+                  
                   <div class="text-center">
-                    <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Tambah</button>
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Tambah</button>
                   </div>
                 </form>
               </div>
@@ -40,4 +57,4 @@
           </div>
         </div>
       </div>
-<%- include('../partials/footer') %>
+      <%- include('../partials/footer') %>

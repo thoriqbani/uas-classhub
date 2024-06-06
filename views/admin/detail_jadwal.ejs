@@ -84,7 +84,9 @@
 						<h2>
 							<%= nama %>
 						</h2>
-						<p><%= level_user %></p>
+						<p>
+							<%= level_user %>
+						</p>
 					</div>
 				</div>
 			</a>
@@ -232,7 +234,7 @@
 				<!-- Content -->
 				<div class="container-xxl flex-grow-1 container-p-y">
 					<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Detail Jadwal</h4>
-					
+
 					<!-- Parent Row -->
 					<div class="row">
 						<!-- Left Section -->
@@ -260,7 +262,8 @@
 																- <%= dataMapel[0].jam_akhir %></a>
 
 												</li>
-												<form action="/admin/detail/delete/<%= dataMapel[0].id %>" method="post" class="list-group-item">
+												<form action="/admin/detail/delete/<%= dataMapel[0].id %>" method="post"
+													class="list-group-item">
 													<button type="submit" class="btn btn-primary">Hapus</button>
 												</form>
 											</ul>
@@ -270,17 +273,18 @@
 							</div>
 						</div>
 						<!-- Right Section -->
-						<div class="col-lg-8">
+						<div class="col-lg-7">
 							<div class="card kanan">
-								<form role="form text-left" action="/admin/detail/update/<%= dataMapel[0].id %>" method="post">
+								<form role="form text-left" action="/admin/detail/update/<%= dataMapel[0].id %>"
+									method="post">
 									<div class="card-body">
 										<div class="row mb-3">
 											<div class="col-sm-3">
 												<h6 class="mb-0">Hari</h6>
 											</div>
 											<div class="col-sm-9 text-secondary">
-												<input type="text" class="form-control" placeholder="<%= dataMapel[0].hari %>"
-													name="hari">
+												<input type="text" class="form-control"
+													placeholder="<%= dataMapel[0].hari %>" name="hari">
 											</div>
 										</div>
 										<div class="row mb-3">
@@ -301,26 +305,35 @@
 													placeholder="<%= dataMapel[0].jam_akhir %>">
 											</div>
 										</div>
-										<div class="form-group">
-											<select id="" name="user_id">
-												<option>--Pilih Guru--</option>
-												<% for(var i=0; i < user_list.length; i++) { %>
-												<option value="<%= user_list[i].id %>">
-													<%= user_list[i].nama %>
-												</option>
-												<% } %>
-											</select>
+										<div class="row mb-3">
+											<div class="col-sm-3">
+												<h6 class="mb-0">Guru</h6>
+											</div>
+											<div class="form-group col-sm-9">
+												<select id="" name="user_id" class="form-control">
+													<option>	Pilih Guru	</option>
+													<% for(var i=0; i < user_list.length; i++) { %>
+														<option value="<%= user_list[i].id %>">
+															<%= user_list[i].nama %>
+														</option>
+														<% } %>
+												</select>
+											</div>
 										</div>
-										<label for="mapel_id">Mapel ID:</label>
-										<div class="form-group">
-											<select id="" name="mapel_id">
-												<option>--Pilih Mapel--</option>
-												<% for(var i=0; i < pelajaran_list.length; i++) { %>
-													<option value="<%= pelajaran_list[i].id %>">
-														<%= pelajaran_list[i].nama_mapel %>
-													</option>
-												<% } %>
-											</select>
+										<div class="row mb-3">
+											<div class="col-sm-3">
+												<h6 class="mb-0">Mapel</h6>
+											</div>
+											<div class="form-group col-sm-9">
+												<select id="" name="mapel_id" class="form-control">
+													<option>	Pilih Mapel	</option>
+													<% for(var i=0; i < pelajaran_list.length; i++) { %>
+														<option value="<%= pelajaran_list[i].id %>">
+															<%= pelajaran_list[i].nama_mapel %>
+														</option>
+														<% } %>
+												</select>
+											</div>
 										</div>
 										<div class="row">
 											<div class="col-sm-3"></div>
@@ -332,25 +345,25 @@
 								</form>
 							</div>
 						</div>
-						</div>
+					</div>
 					<!-- Core JS Files   -->
-						<script src="../../soft/assets/js/core/popper.min.js"></script>
-						<script src="../../soft/assets/js/core/bootstrap.min.js"></script>
-						<script src="../../soft/assets/js/plugins/perfect-scrollbar.min.js"></script>
-						<script src="../../soft/assets/js/plugins/smooth-scrollbar.min.js"></script>
-						<script>
-							var win = navigator.platform.indexOf('Win') > -1;
-							if (win && document.querySelector('#sidenav-scrollbar')) {
-								var options = {
-									damping: '0.5'
-								}
-								Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+					<script src="../../soft/assets/js/core/popper.min.js"></script>
+					<script src="../../soft/assets/js/core/bootstrap.min.js"></script>
+					<script src="../../soft/assets/js/plugins/perfect-scrollbar.min.js"></script>
+					<script src="../../soft/assets/js/plugins/smooth-scrollbar.min.js"></script>
+					<script>
+						var win = navigator.platform.indexOf('Win') > -1;
+						if (win && document.querySelector('#sidenav-scrollbar')) {
+							var options = {
+								damping: '0.5'
 							}
-						</script>
-						<!-- Github buttons -->
-						<script async defer src="https://buttons.github.io/buttons.js"></script>
-						<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-						<script src="../../soft/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
+							Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+						}
+					</script>
+					<!-- Github buttons -->
+					<script async defer src="https://buttons.github.io/buttons.js"></script>
+					<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+					<script src="../../soft/assets/js/soft-ui-dashboard.min.js?v=1.0.3"></script>
 </body>
 
 </html>

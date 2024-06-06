@@ -1,44 +1,95 @@
 <%- include('../partials/header') %>
-<%- include('../partials/navbarAdmin') %>
-<%- include('../partials/message') %>
-    <div class="container mt-4">
-        <h1>Tambah Jadwal</h1>
-        <form action="/admin/jadwal/create" method="POST">
-            <div class="form-group">
-                <label for="hari">Hari:</label>
-                <input type="text" id="hari" name="hari" class="form-control" required>
+    <%- include('../partials/navbarAdmin') %>
+        <%- include('../partials/message') %>
+
+
+            <style>
+                .kebawah {
+                    margin-top: 250px;
+                }
+            </style>
+
+            <div class="kebawah container">
+                <div class="row mt-lg-n15 mt-md-n11 mt-n10">
+                    <div class="col-xl-5 col-lg-6 col-md-8 mx-auto">
+                        <div class="card z-index-0">
+                            <div class="card-header text-center pt-4">
+                                <h5>Tambah Jadwal</h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/admin/jadwal/create" method="POST">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Hari</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input type="text" id="hari" name="hari" class="form-control" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Jam Awal</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input type="time" id="jam_awal" name="jam_awal" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Jam Akhir</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input type="time" id="jam_akhir" name="jam_akhir" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Guru</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="form-group">
+                                                <select id="" name="user_id" class="form-control">
+                                                    <option>Pilih Guru</option>
+                                                    <% for(var i=0; i < user_list.length; i++) { %>
+                                                        <option value="<%= user_list[i].id %>">
+                                                            <%= user_list[i].nama %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Mapel</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="form-group">
+                                                <select id="" name="user_id" class="form-control">
+                                                    <option>Pilih Mapel</option>
+                                                    <% for(var i=0; i < pelajaran_list.length; i++) { %>
+                                                        <option value="<%= pelajaran_list[i].id %>">
+                                                            <%= pelajaran_list[i].nama_mapel %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit"
+                                            class="btn bg-gradient-primary  w-100 my-4 mb-2">Tambah</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="jam_awal">Jam Awal:</label>
-                <input type="time" id="jam_awal" name="jam_awal" class="form-control" required>
-            </div>
-            <div class="form-group">
-                <label for="jam_akhir">Jam Akhir:</label>
-                <input type="time" id="jam_akhir" name="jam_akhir" class="form-control" required>
-            </div>
-            <label for="mapel_id">User ID:</label>
-            <div class="form-group">
-                <select id="" name="user_id">
-                    <option>--Pilih Guru--</option>
-                    <% for(var i=0; i < user_list.length; i++) { %>
-                    <option value="<%= user_list[i].id %>">
-                        <%= user_list[i].nama %>
-                    </option>
-                    <% } %>
-                </select>
-            </div>
-            <label for="mapel_id">Mapel ID:</label>
-            <div class="form-group">
-                <select id="" name="mapel_id">
-                    <option>--Pilih Mapel--</option>
-                    <% for(var i=0; i < pelajaran_list.length; i++) { %>
-                        <option value="<%= pelajaran_list[i].id %>">
-                            <%= pelajaran_list[i].nama_mapel %>
-                        </option>
-                    <% } %>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary">Tambah Jadwal</button>
-        </form>
-    </div>
-<%- include('../partials/footer') %>
+            <%- include('../partials/footer') %>
