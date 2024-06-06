@@ -13,9 +13,9 @@ class presensi_model {
         })
     }
 
-    static async getPresensiByPresensiAndUserId(presensi_id, user_id){
+    static async getPresensiByPresensiAndUserId(mapel_id, user_id){
         return new Promise((resolve, reject) => {
-            connect.query('select user.nama, DATE_FORMAT(tanggal_presensi, "%d-%m-%Y") AS tanggal_presensi, jam_presensi, status  from presensi join user on presensi.user_id = user.id where presensi.id = ? and user_id = ?', [presensi_id, user_id], (err, rows) => {
+            connect.query('select user.nama, DATE_FORMAT(tanggal_presensi, "%d-%m-%Y") AS tanggal_presensi, jam_presensi, status  from presensi join user on presensi.user_id = user.id where mapel_id = ? and user_id = ?', [mapel_id, user_id], (err, rows) => {
                 if(err){
                     reject(err);
                 } else {

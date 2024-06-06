@@ -25,8 +25,6 @@ router.get('/', async (req, res) => {
                     pages: 'jadwal',
                     user_list: user_list,
                     pelajaran_list: pelajaran_list,
-                    tugasList: tugasList,
-                    materiList: materiList,
                     nama: data_user[0].nama,
                     level_user: data_user[0].level_user,
                     photos: data_user[0].photos,
@@ -54,8 +52,9 @@ router.post('/create', async (req, res) => {
             user_id,
             mapel_id
         };
-        await tugas_model.store(data);
-        console.log("File uploaded:", req.file.filename);
+        console.log(data)
+        await jadwal_model.store(data);
+        req.flash('success','Create Jadwal Berhasil !!')
         res.redirect('/admin/jadwal');
     } catch (error) {
         console.error(error);

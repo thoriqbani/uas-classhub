@@ -73,16 +73,6 @@ router.post('/', upload.single("photos"), async function(req, res){
       return res.redirect('/siswa/editProfile');
     }
     
-    if (password.length < 8) {
-      req.flash('messageError', ' Password harus terdiri dari minimal 8 karakter !!');
-      return res.redirect('/siswa/editProfile');
-    }
-
-    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)) {
-      req.flash('messageError', ' Password harus terdiri dari angka dan huruf saja !!');
-      return res.redirect('/siswa/editProfile');
-    }
-    
     let data = {
       nama,
       jenis_kelamin,

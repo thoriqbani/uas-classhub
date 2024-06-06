@@ -33,11 +33,11 @@ router.get('/', async function(req, res, next) {
 
 router.post('/presensi', async function(req, res) {
   try {
-    const user_id = req.session.userId;
-    const today = new Date();
+    const user_id = req.session.userId
+    const today = new Date()
     const { mapel_id } = req.body
-    const tanggal = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    const waktu = today.getHours() + ':' + today.getMinutes();
+    const tanggal = today.getFullYear()+'-'+(today.getMonth() + 1)+'-'+today.getDate();
+    const waktu = today.getHours()+':'+today.getMinutes();
     const cek = await presensi_model.getPresensi(user_id, tanggal, mapel_id);
 
     // Jika sudah absen
@@ -52,7 +52,7 @@ router.post('/presensi', async function(req, res) {
         user_id: user_id,
         mapel_id: mapel_id
       };
-      console.log(data)
+      
       const save = await presensi_model.Store(data);
 
       if (save) {

@@ -3,13 +3,13 @@
 <script src="../soft/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="../soft/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script>
-  var win = navigator.platform.indexOf('Win') > -1;
-  if (win && document.querySelector('#sidenav-scrollbar')) {
-    var options = {
-      damping: '0.5'
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+        var options = {
+            damping: '0.5'
+        }
+        Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-  }
 </script>
 <!-- Github buttons -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
@@ -18,66 +18,67 @@
 <!-- Swipers JS -->
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-      const swiper = new Swiper('.swiper-container', {
-          slidesPerView: 3, // Show 3 slides at a time
-          spaceBetween: 30, // Space between slides in px
-          pagination: {
-              el: '.swiper-pagination',
-              clickable: true,
-          },
-          navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-          },
-          breakpoints: {
-              // Configure breakpoints if needed
-              640: {
-                  slidesPerView: 1,
-                  spaceBetween: 20,
-              },
-              768: {
-                  slidesPerView: 2,
-                  spaceBetween: 30,
-              },
-              1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 30,
-              },
-          },
-      });
-      const swipers = new Swiper('.swipers-container', {
-          slidesPerView: 3, // Show 3 slides at a time
-          spaceBetween: 30, // Space between slides in px
-          pagination: {
-              el: '.swipers-pagination',
-              clickable: true,
-          },
-          navigation: {
-              nextEl: '.swipers-button-next',
-              prevEl: '.swipers-button-prev',
-          },
-          breakpoints: {
-              // Configure breakpoints if needed
-              640: {
-                  slidesPerView: 1,
-                  spaceBetween: 20,
-              },
-              768: {
-                  slidesPerView: 2,
-                  spaceBetween: 30,
-              },
-              1024: {
-                  slidesPerView: 3,
-                  spaceBetween: 30,
-              },
-          },
-      });
-  });
+    document.addEventListener('DOMContentLoaded', function () {
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 3, // Show 3 slides at a time
+            spaceBetween: 30, // Space between slides in px
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                // Configure breakpoints if needed
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+        const swipers = new Swiper('.swipers-container', {
+            slidesPerView: 3, // Show 3 slides at a time
+            spaceBetween: 30, // Space between slides in px
+            pagination: {
+                el: '.swipers-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swipers-button-next',
+                prevEl: '.swipers-button-prev',
+            },
+            breakpoints: {
+                // Configure breakpoints if needed
+                640: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 30,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 30,
+                },
+            },
+        });
+    });
 </script>
 
 
 </body>
 
 </html>
+
 </html>

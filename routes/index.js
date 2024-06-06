@@ -91,7 +91,7 @@ router.post('/register', upload.single("photos"), async function(req, res) {
       photos: req.file.filename,
       email,
       password: enskripsi,
-      level_user: 'admin'
+      level_user: 'siswa'
     };
     let cek = siswa_model.Store(data);
     if (cek) {

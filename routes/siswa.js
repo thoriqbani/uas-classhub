@@ -14,7 +14,6 @@ router.get('/', async function(req, res, next) {
   try {
     let data_user = await siswa_model.getByID(id)
     let data_harisenin = await jadwal_model.getAllByHariSenin()
-    console.log(data_harisenin)
     let data_hariselasa = await jadwal_model.getAllByHariSelasa()
     let data_harirabu = await jadwal_model.getAllByHariRabu()
     let data_harikamis = await jadwal_model.getAllByHariKamis()
@@ -48,15 +47,17 @@ router.get('/', async function(req, res, next) {
   }
 });
 
-router.get('/detail/(:presensiId)', async function(req, res, next) {
-  let presensiID = req.params.presensiId
+router.get('/detail/(:jadwalId)', async function(req, res, next) {
+  let jadwalID = req.params.jadwalId
   let id = req.session.userId
   try {
     let data_user = await siswa_model.getByID(id)
-    let data_mapel = await jadwal_model.getByID(presensiID)
-    let dataPresensi = await presensi_model.getPresensiByPresensiAndUserId(presensiID, id)
-    // let dataPresensi = await presensi_model.getPresensiByPresensiId(id)
+    let data_mapel = await jadwal_model.getById(jadwalID)
     console.log(data_mapel)
+    let dataPresensi = await presensi_model.getPresensiByPresensiAndUserId(data_mapel[0].mapel_id, id)
+    console.log(dataPresensi)
+    
+    // let dataPresensi = await presensi_model.getPresensiByPresensiId(id)
     let today = new Date();
     let hours = today.getHours();
     let minutes = today.getMinutes();

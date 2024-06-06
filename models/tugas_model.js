@@ -24,6 +24,18 @@ class tugas_model {
             });
         });
     }
+
+    static async getByTugasID(tugas_id) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT * FROM tugas WHERE tugas.id = ? ORDER BY id DESC', [tugas_id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
     
     static async getAllByUserId(userId) {
         return new Promise((resolve, reject) => {
@@ -50,21 +62,22 @@ class tugas_model {
         });
     }
 
+    static async delete(tugasID) {
+        return new Promise((resolve, reject) => {
+            connect.query('DELETE FROM tugas WHERE id = ?', tugasID, function(err, result) {
+                if (err) {
+                    reject(err);
+                    console.log(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
     static async getByMapel(mapel_id) {
         return new Promise((resolve, reject) => {
             connect.query('SELECT id, judul, file_tugas, deskripsi, DATE_FORMAT(tanggal_deadline, "%d-%m-%Y") AS tanggal_deadline, waktu_deadline FROM tugas WHERE mapel_id = ? ORDER BY id DESC', [mapel_id], (err, rows) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(rows);
-                }
-            })
-        })
-    }
-
-    static async getByTugasId(tugas_id) {
-        return new Promise((resolve, reject) => {
-            connect.query('SELECT waktu_deadline, id, DATE_FORMAT(tanggal_deadline, "%Y-%m-%d") AS tanggal_deadline, mapel_id FROM tugas WHERE id = ? ORDER BY id DESC', tugas_id, (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
