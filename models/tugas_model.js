@@ -75,6 +75,19 @@ class tugas_model {
         });
     }
 
+    static async update(data, tugasID) {
+        return new Promise((resolve, reject) => {
+            connect.query('UPDATE tugas set ? WHERE id = ?', [data, tugasID], function(err, result) {
+                if (err) {
+                    reject(err);
+                    console.log(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
     static async getByMapel(mapel_id) {
         return new Promise((resolve, reject) => {
             connect.query('SELECT id, judul, file_tugas, deskripsi, DATE_FORMAT(tanggal_deadline, "%d-%m-%Y") AS tanggal_deadline, waktu_deadline FROM tugas WHERE mapel_id = ? ORDER BY id DESC', [mapel_id], (err, rows) => {

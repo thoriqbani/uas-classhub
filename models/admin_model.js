@@ -39,6 +39,18 @@ class admin_model {
         })
     }
 
+    static async getAll(){
+        return new Promise((resolve, reject) => {
+            connect.query('select * from user where level_user = "guru"', function(err, rows){
+                if(err){
+                    reject(err)
+                } else {
+                    resolve(rows)
+                }
+            })
+        })
+    }
+
     static async getByID(id){
         return new Promise((resolve, reject) => {
             connect.query('select * from user where id = ?', id, function(err, rows){

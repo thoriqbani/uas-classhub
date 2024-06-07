@@ -89,6 +89,61 @@ router.get('/detail/tugas/(:tugasId)', async (req, res) => {
     }
 });
 
+router.get('/detail/materi/(:materiId)', async (req, res) => {
+    try {
+        let materiId = req.params.materiId
+        console.log(materiId)
+        let userId = req.session.userId;
+        // let tugasList = await tugas_model.getByTugasID(tugasId);
+        let data_user = await guru_model.getByID(userId);
+        let materiList = await materi_model.getByMateriID(materiId);
+
+        if (data_user.length > 0) {
+            if (data_user[0].level_user != 'guru') {
+                res.redirect('/logout');
+            } else {
+                res.render('guru/detail_materi', {
+                    pages: 'Detail Materi',
+                    materiList: materiList,
+                    nama: data_user[0].nama,
+                    level_user: data_user[0].level_user,
+                    photos: data_user[0].photos,
+                    email: data_user[0].email
+                });
+            }
+        } else {
+            res.status(401).json({ error: 'user tidak ada' });
+        }
+    } catch (error) {
+        console.error(error);
+        res.status(501).json('error pada fungsi');
+    }
+});
+
+router.post("/detail/materi/update/(:materiId)", upload.single("file_materi"), async (req, res) => {
+    let { materiId } = req.params
+    try {
+      const { judul, deskripsi, mapel_id } =
+        req.body;
+      const file_materi = req.file.filename;
+      const data = {
+        judul,
+        deskripsi,
+        file_materi,
+        status: 'complete',
+        user_id: req.session.userId,
+        mapel_id,
+      };
+      await materi_model.update(data, materiId);
+      console.log("File uploaded:", req.file.filename);
+      req.flash("success", "Update Tugas Berhasil !!");
+      res.redirect("/guru");
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("Internal Server Error");
+    }
+});
+
 router.post("/detail/tugas/update/(:tugasId)", upload.single("file_tugas"), async (req, res) => {
     let { tugasId } = req.params
     try {
@@ -104,7 +159,7 @@ router.post("/detail/tugas/update/(:tugasId)", upload.single("file_tugas"), asyn
         user_id: req.session.userId,
         mapel_id,
       };
-      await tugas_model.store(data, tugasId);
+      await tugas_model.update(data, tugasId);
       console.log("File uploaded:", req.file.filename);
       req.flash("success", "Update Tugas Berhasil !!");
       res.redirect("/guru");
@@ -112,40 +167,30 @@ router.post("/detail/tugas/update/(:tugasId)", upload.single("file_tugas"), asyn
       console.error(error);
       res.status(500).send("Internal Server Error");
     }
-  });
+});
 
-// next
-// router.get('/detail/materi/(:id)', async (req, res) => {
-//     try {
-//         let userId = req.session.userId;
-//         let data_user = await guru_model.getByID(userId);
-//         let tugasList = await tugas_model.getAllByUserId(userId);
-//         let materiList = await materi_model.getAllByUserId(userId);
-//         // const tanggal = tugasList.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+router.post('/tugas/delete/:tugasId', async (req, res) => {
+    try {
+        let tugasId = req.params.tugasId;
+        await tugas_model.delete(tugasId);
+        req.flash('success', 'Tugas berhasil dihapus');
+        res.redirect('/guru');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
-//         if (data_user.length > 0) {
-//             if (data_user[0].level_user != 'guru') {
-//                 res.redirect('/logout');
-//             } else {
-//                 res.render('guru/detail_materi', {
-//                     pages: 'detail materi',
-//                     tugasList: tugasList,
-//                     materiList: materiList,
-//                     nama: data_user[0].nama,
-//                     level_user: data_user[0].level_user,
-//                     photos: data_user[0].photos,
-//                     email: data_user[0].email
-//                 });
-//             }
-//         } else {
-//             res.status(401).json({ error: 'user tidak ada' });
-//         }
-//     } catch (error) {
-//         console.error(error);
-//         res.status(501).json('error pada fungsi');
-//     }
-// });
-
-
+router.post('/materi/delete/:materiId', async (req, res) => {
+    try {
+        let materiId = req.params.materiId;
+        await materi_model.delete(materiId);
+        req.flash('success', 'Tugas berhasil dihapus');
+        res.redirect('/guru');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 module.exports = router;

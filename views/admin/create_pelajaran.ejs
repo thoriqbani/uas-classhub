@@ -1,0 +1,90 @@
+<%- include('../partials/header') %>
+    <%- include('../partials/navbarAdmin') %>
+        <%- include('../partials/message') %>
+            <style>
+                .kebawah {
+                    margin-top: 250px;
+                }
+            </style>
+            <div class="kebawah container">
+                <div class="row mt-lg-n15 mt-md-n11 mt-n10">
+                    <div class="col-xl-5 col-lg-6 col-md-8 mx-auto">
+                        <div class="card z-index-0">
+                            <div class="card-header text-center pt-4">
+                                <h5>Tambah Pelajaran</h5>
+                            </div>
+                            <div class="card-body">
+                                <form action="/admin/pelajaran/create" method="POST">
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Nama Mapel</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <input type="text" placeholder="Nama Mapel" name="nama_mapel" class="form-control"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-sm-4">
+                                            <h6 class="mb-0">Guru</h6>
+                                        </div>
+                                        <div class="col-sm-7">
+                                            <div class="form-group">
+                                                <select id="" name="user_id" class="form-control">
+                                                    <option>Pilih Guru</option>
+                                                    <% for(var i=0; i < user_list.length; i++) { %>
+                                                        <option value="<%= user_list[i].id %>">
+                                                            <%= user_list[i].nama %>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center">
+                                        <button type="submit"
+                                            class="btn bg-gradient-primary  w-100 my-4 mb-2">Tambah</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="card z-index-0">
+                      <div class="card-header text-center pt-4">
+                        <h5>Detail Pelajaran</h5>
+                      </div>
+                      <div class="card-body">
+                        <div class="table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Nama User</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <% for (let i = 0; i < pelajaran_list.length; i++) { %>
+                                <tr>
+                                  <td><%= (i + 1) %></td>
+                                  <td><%= pelajaran_list[i].nama_mapel %></td>
+                                  <td><%= pelajaran_list[i].user_id%></td>
+                                  <td>
+                                    <a href="/admin/pelajaran/update/<%= pelajaran_list[i].id %>">Update</a>
+                                    <form action="/admin/pelajaran/delete/<%= pelajaran_list[i].id %>" method="post">
+                                        <button type="submit">Delete</button>
+                                    </form>
+                                  </td>
+                                </tr>
+                              <% } %>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+<%- include('../partials/footer') %>

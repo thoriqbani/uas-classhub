@@ -13,6 +13,31 @@ class materi_model {
         });
     }
 
+    static async getByMateriID(materi_id) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT * FROM materi WHERE materi.id = ? ORDER BY materi.id DESC', [materi_id], (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
+    static async update(data, materiID) {
+        return new Promise((resolve, reject) => {
+            connect.query('UPDATE materi set ? WHERE id = ?', [data, materiID], function(err, result) {
+                if (err) {
+                    reject(err);
+                    console.log(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
+
     static async getByMapel(mapel_id) {
         return new Promise((resolve, reject) => {
             connect.query('SELECT * FROM materi WHERE mapel_id = ? ORDER BY id DESC', [mapel_id], (err, rows) => {
@@ -27,7 +52,7 @@ class materi_model {
     
     static async getAllByUserId(userId) {
         return new Promise((resolve, reject) => {
-            connect.query('SELECT judul, deskripsi, file_materi, status FROM materi WHERE user_id = ? order by id desc', [userId], (err, rows) => {
+            connect.query('SELECT judul, deskripsi, file_materi, status, materi.id FROM materi WHERE user_id = ? order by id desc', [userId], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -50,6 +75,18 @@ class materi_model {
         });
     }
 
+    static async delete(materiID) {
+        return new Promise((resolve, reject) => {
+            connect.query('DELETE FROM materi WHERE id = ?', materiID, function(err, result) {
+                if (err) {
+                    reject(err);
+                    console.log(err);
+                } else {
+                    resolve(result);
+                }
+            });
+        });
+    }
 }
 
 module.exports = materi_model;

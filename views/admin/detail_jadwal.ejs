@@ -279,13 +279,20 @@
 									method="post">
 									<div class="card-body">
 										<div class="row mb-3">
-											<div class="col-sm-3">
-												<h6 class="mb-0">Hari</h6>
+											<div class="col-sm-4">
+												<h6 class="mb-0">Jam Awal</h6>
 											</div>
-											<div class="col-sm-9 text-secondary">
-												<input type="text" class="form-control"
-													placeholder="<%= dataMapel[0].hari %>" name="hari">
-											</div>
+											<select class="col-sm-7" name="hari">
+												<option selected value="<%= dataMapel[0].hari %>">
+													<%= dataMapel[0].hari %>
+												</option>
+												<option value="senin">Senin</option>
+												<option value="selasa">Selasa</option>
+												<option value="rabu">Rabu</option>
+												<option value="kamis">Kamis</option>
+												<option value="jumat">Jum'at</option>
+												<option value="sabtu">Sabtu</option>
+											</select>
 										</div>
 										<div class="row mb-3">
 											<div class="col-sm-3">
@@ -311,7 +318,7 @@
 											</div>
 											<div class="form-group col-sm-9">
 												<select id="" name="user_id" class="form-control">
-													<option>	Pilih Guru	</option>
+													<option> Pilih Guru </option>
 													<% for(var i=0; i < user_list.length; i++) { %>
 														<option value="<%= user_list[i].id %>">
 															<%= user_list[i].nama %>
@@ -326,7 +333,7 @@
 											</div>
 											<div class="form-group col-sm-9">
 												<select id="" name="mapel_id" class="form-control">
-													<option>	Pilih Mapel	</option>
+													<option> Pilih Mapel </option>
 													<% for(var i=0; i < pelajaran_list.length; i++) { %>
 														<option value="<%= pelajaran_list[i].id %>">
 															<%= pelajaran_list[i].nama_mapel %>
