@@ -6,85 +6,135 @@
                     margin-top: 250px;
                 }
             </style>
-            <div class="kebawah container">
-                <div class="row mt-lg-n15 mt-md-n11 mt-n10">
-                    <div class="col-xl-5 col-lg-6 col-md-8 mx-auto">
-                        <div class="card z-index-0">
-                            <div class="card-header text-center pt-4">
-                                <h5>Tambah Pelajaran</h5>
-                            </div>
-                            <div class="card-body">
-                                <form action="/admin/pelajaran/create" method="POST">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-4">
-                                            <h6 class="mb-0">Nama Mapel</h6>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <input type="text" placeholder="Nama Mapel" name="nama_mapel" class="form-control"
-                                                required>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-sm-4">
-                                            <h6 class="mb-0">Guru</h6>
-                                        </div>
-                                        <div class="col-sm-7">
-                                            <div class="form-group">
-                                                <select id="" name="user_id" class="form-control">
-                                                    <option>Pilih Guru</option>
-                                                    <% for(var i=0; i < user_list.length; i++) { %>
-                                                        <option value="<%= user_list[i].id %>">
-                                                            <%= user_list[i].nama %>
-                                                        </option>
-                                                        <% } %>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="text-center">
-                                        <button type="submit"
-                                            class="btn bg-gradient-primary  w-100 my-4 mb-2">Tambah</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-12">
-                    <div class="card z-index-0">
-                      <div class="card-header text-center pt-4">
-                        <h5>Detail Pelajaran</h5>
+            <div class="content-wrapper">
+              <!-- Content -->
+              <div class="container-xxl flex-grow-1 container-p-y">
+                  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Tambah Pelajaran</h4>
+          
+                  <!-- Parent Row -->
+                  <div class="row">
+                      <!-- Left Section -->
+                      <div class="col-md-5">
+                          <div class="card mb-4 kiri" style="border:1px dotted  grey;">
+                              <div class="card-header text-center pt-4">
+                                  <h5>Tambah Pelajaran</h5>
+                              </div>
+                              <div class="card-body">
+                                  <form action="/admin/pelajaran/create" method="POST">
+                                      <div class="row mb-3">
+                                          <div class="col-sm-4">
+                                              <h6 class="mb-0">Nama Mapel</h6>
+                                          </div>
+                                          <div class="col-sm-8">
+                                              <input type="text" placeholder="Nama Mapel" name="nama_mapel" class="form-control" required>
+                                          </div>
+                                      </div>
+                                      <div class="row mb-3">
+                                          <div class="col-sm-4">
+                                              <h6 class="mb-0">Guru</h6>
+                                          </div>
+                                          <div class="col-sm-8">
+                                              <div class="form-group">
+                                                  <select id="" name="user_id" class="form-control">
+                                                      <option>Pilih Guru</option>
+                                                      <% for(var i=0; i < user_list.length; i++) { %>
+                                                          <option value="<%= user_list[i].id %>">
+                                                              <%= user_list[i].nama %>
+                                                          </option>
+                                                      <% } %>
+                                                  </select>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="text-center">
+                                          <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Tambah</button>
+                                      </div>
+                                  </form>
+                              </div>
+                          </div>
                       </div>
-                      <div class="card-body">
-                        <div class="table-responsive">
-                          <table class="table table-striped">
-                            <thead>
-                              <tr>
-                                <th>No</th>
-                                <th>Nama</th>
-                                <th>Nama User</th>
-                                <th>Action</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              <% for (let i = 0; i < pelajaran_list.length; i++) { %>
-                                <tr>
-                                  <td><%= (i + 1) %></td>
-                                  <td><%= pelajaran_list[i].nama_mapel %></td>
-                                  <td><%= pelajaran_list[i].user_id%></td>
-                                  <td>
-                                    <a href="/admin/pelajaran/update/<%= pelajaran_list[i].id %>">Update</a>
-                                    <form action="/admin/pelajaran/delete/<%= pelajaran_list[i].id %>" method="post">
-                                        <button type="submit">Delete</button>
-                                    </form>
-                                  </td>
-                                </tr>
-                              <% } %>
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
+          
+                      <!-- Right Section -->
+<div class="col-lg-7">
+  <div class="card kanan " style="border:1px dotted  grey;">
+      <div class="card-header text-center pt-4">
+          <h5>Detail Pelajaran</h5>
+      </div>
+      <div class="card-body">
+          <div class="table-responsive">
+              <table class="table table">
+                  <thead>
+                      <tr>
+                          <th>No</th>
+                          <th>Mapel</th>
+                          <th>Guru</th>
+                          <th>Action</th>
+                      </tr>
+                  </thead>
+                  <tbody id="table-body">
+                    <% for (let i = 0; i < pelajaran_list.length; i++) { %>
+                      <% let currentPelajaran = pelajaran_list[i]; %>
+                      <% let correspondingUser = user_list.find(user => user.id === currentPelajaran.user_id); %>
+                      <tr class="table-row">
+                          <td><%= (i + 1) %></td>
+                          <td><%= currentPelajaran.nama_mapel %></td>
+                          <td><%= correspondingUser.nama %></td>
+                          <td>
+                                  <div class="dropdown">
+                                      <button class="btn btn-link dropdown-toggle" type="button" id="dropdownMenuButton<%= i %>" data-bs-toggle="dropdown" aria-expanded="false">
+                                          
+                                      </button>
+                                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton<%= i %>">
+                                          <li>
+                                              <a class="dropdown-item" href="/admin/pelajaran/update/<%= pelajaran_list[i].id %>">Update</a>
+                                          </li>
+                                          <li>
+                                              <form action="/admin/pelajaran/delete/<%= pelajaran_list[i].id %>" method="post">
+                                                  <button type="submit" class="dropdown-item">Delete</button>
+                                              </form>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </td>
+                          </tr>
+                      <% } %>
+                  </tbody>
+              </table>
+          </div>
+          <div class="text-center mt-3">
+              <button id="toggle-table" class="btn btn-transparent">Selengkapnya</button>
+          </div>
+      </div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const rows = document.querySelectorAll('.table-row');
+  const toggleBtn = document.getElementById('toggle-table');
+
+  let isExpanded = false;
+  const visibleRows = 4;
+
+  function updateTable() {
+      rows.forEach((row, index) => {
+          if (isExpanded || index < visibleRows) {
+              row.style.display = '';
+          } else {
+              row.style.display = 'none';
+          }
+      });
+
+      toggleBtn.textContent = isExpanded ? 'Tutup' : 'Selengkapnya';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+      isExpanded = !isExpanded;
+      updateTable();
+  });
+
+  updateTable();
+});
+</script>
+
 <%- include('../partials/footer') %>
