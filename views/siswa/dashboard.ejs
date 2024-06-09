@@ -1,192 +1,261 @@
 <%- include('../partials/header') %>
-<%- include('../partials/navbar') %>
-<%- include('../partials/message') %>
+    <%- include('../partials/navbar') %>
+        <%- include('../partials/message') %>
 
-<style>
-    .profile {
-        display: flex;
-        justify-content: center; /* Centers profile horizontally */
-        align-items: center; /* Centers profile vertically */
-        margin-bottom: 20px; /* Space below profile and schedule cards */
-    }
-    .profile-info img {
-        border-radius: 50%; /* Makes image round */
-        width: 150px; /* Adjust image size */
-        height: 150px;
-    }
-    .profile-info h2 {
-        text-align: center; /* Centers name horizontally */
-    }
-    .schedule {
-        display: grid; /* Uses Grid Layout */
-        grid-template-columns: repeat(3, 1fr); /* Creates 3 columns */
-        gap: 20px; /* Space between cards */
-        justify-items: center; /* Centers items horizontally */
-        padding: 20px;
-    }
+            <style>
+                .profile {
+                    display: flex;
+                    justify-content: center;
+                    /* Centers profile horizontally */
+                    align-items: center;
+                    /* Centers profile vertically */
+                    margin-bottom: 20px;
+                    /* Space below profile and schedule cards */
+                }
 
-    .card {
-        background-color: #ea9ed9; /* Purple color */
-        text-align: center;
-        width: 100%; /* Matches card width to column width */
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
+                .profile-info img {
+                    border-radius: 50%;
+                    /* Makes image round */
+                    width: 150px;
+                    /* Adjust image size */
+                    height: 150px;
+                }
 
-    .card-content {
-        padding: 20px;
-    }
+                .profile-info h2 {
+                    text-align: center;
+                    /* Centers name horizontally */
+                }
 
-    .card h3 {
-        width: 100%;
-        margin: 0;
-        font-size: 20px;
-        color: #ffffff;
-        background-color: #6b7991; 
-        padding: 10px;
-        border-radius: 10px;
-    }
-    .card h4 {
-        margin: 0;
-        font-size: 20px;
-        color: white;
-    }
-    .card p {
-        margin: 5px 0;
-        color: #41454a;
-    }
-    .profile-info h6 {
-        text-align: center; /* Centers name horizontally */
-    }
-    .card a {
-        text-decoration: none; /* Removes underline from links */
-        color: inherit; /* Uses current text color */
-    }
-    .warna-putih {
-        color: white;
-    }
-    .warna-abu {
-        background-color: #a3adba;
-    }
+                .schedule {
+                    display: grid;
+                    /* Uses Grid Layout */
+                    grid-template-columns: repeat(3, 1fr);
+                    /* Creates 3 columns */
+                    gap: 20px;
+                    /* Space between cards */
+                    justify-items: center;
+                    /* Centers items horizontally */
+                    padding: 20px;
+                }
 
-    /* Responsive styles */
-    @media (max-width: 768px) {
-        .schedule {
-            grid-template-columns: 1fr; /* Single column layout for mobile */
-        }
+                .card {
+                    background-color: #ea9ed9;
+                    /* Purple color */
+                    text-align: center;
+                    width: 100%;
+                    /* Matches card width to column width */
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    overflow: hidden;
+                }
 
-        .card h3, .card h4, .card p {
-            font-size: 16px; /* Smaller font size for mobile */
-        }
+                .card-content {
+                    padding: 20px;
+                }
 
-        .card-content {
-            padding: 10px; /* Less padding for mobile */
-        }
-    }
+                .card h3 {
+                    width: 100%;
+                    margin: 0;
+                    font-size: 20px;
+                    color: #ffffff;
+                    background-color: #6b7991;
+                    padding: 10px;
+                    border-radius: 10px;
+                }
 
-    @media (min-width: 769px) and (max-width: 1024px) {
-        .schedule {
-            grid-template-columns: repeat(2, 1fr); /* Two column layout for tablets */
-        }
+                .card h4 {
+                    margin: 0;
+                    font-size: 20px;
+                    color: white;
+                }
 
-        .card h3, .card h4, .card p {
-            font-size: 18px; /* Medium font size for tablets */
-        }
+                .card p {
+                    margin: 5px 0;
+                    color: #41454a;
+                }
 
-        .card-content {
-            padding: 15px; /* Medium padding for tablets */
-        }
-    }
-</style>
+                .profile-info h6 {
+                    text-align: center;
+                    /* Centers name horizontally */
+                }
+
+                .card a {
+                    text-decoration: none;
+                    /* Removes underline from links */
+                    color: inherit;
+                    /* Uses current text color */
+                }
+
+                .warna-putih {
+                    color: white;
+                }
+
+                .warna-abu {
+                    background-color: #a3adba;
+                }
+
+                /* Responsive styles */
+                @media (max-width: 768px) {
+                    .schedule {
+                        grid-template-columns: 1fr;
+                        /* Single column layout for mobile */
+                    }
+
+                    .card h3,
+                    .card h4,
+                    .card p {
+                        font-size: 16px;
+                        /* Smaller font size for mobile */
+                    }
+
+                    .card-content {
+                        padding: 10px;
+                        /* Less padding for mobile */
+                    }
+                }
+
+                @media (min-width: 769px) and (max-width: 1024px) {
+                    .schedule {
+                        grid-template-columns: repeat(2, 1fr);
+                        /* Two column layout for tablets */
+                    }
+
+                    .card h3,
+                    .card h4,
+                    .card p {
+                        font-size: 18px;
+                        /* Medium font size for tablets */
+                    }
+
+                    .card-content {
+                        padding: 15px;
+                        /* Medium padding for tablets */
+                    }
+                }
+            </style>
 
 
-<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-<!-- Schedule Cards -->
-<div class="schedule">
-    <!-- Card Jadwal untuk Hari Senin -->
-    <div class="card">
-        <div class="card-content">
-            <h3>Senin</h3><br>
-            <% for(var i = 0; i < dataSenin.length; i++) { %>
-                <a href="/siswa/detail/<%= dataSenin[i].id %>">
-                    <h4><%= dataSenin[i].nama_mapel %></h4>
-                    <p><%= dataSenin[i].nama %></p>
-                    <p><%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %></p><br>
-                </a>
-            <% } %>
-        </div>
-    </div>
+            <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
+                <!-- Schedule Cards -->
+                <div class="schedule">
+                    <!-- Card Jadwal untuk Hari Senin -->
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>Senin</h3><br>
+                            <% for(var i=0; i < dataSenin.length; i++) { %>
+                                <a href="/siswa/detail/<%= dataSenin[i].id %>">
+                                    <h4>
+                                        <%= dataSenin[i].nama_mapel %>
+                                    </h4>
+                                    <p>
+                                        <%= dataSenin[i].nama %>
+                                    </p>
+                                    <p>
+                                        <%= dataSenin[i].jam_awal %> - <%= dataSenin[i].jam_akhir %>
+                                    </p><br>
+                                </a>
+                                <% } %>
+                        </div>
+                    </div>
 
-    <!-- Card Jadwal untuk Hari Selasa -->
-    <div class="card">
-        <div class="card-content">
-            <h3>Selasa</h3><br>
-            <% for(var i = 0; i < dataSelasa.length; i++) { %>
-                <a href="/siswa/detail/<%= dataSelasa[i].id %>">
-                    <h4><%= dataSelasa[i].nama_mapel %></h4>
-                    <p><%= dataSelasa[i].nama %></p>
-                    <p><%= dataSelasa[i].jam_awal %> - <%= dataSelasa[i].jam_akhir %></p><br>
-                </a>
-            <% } %>
-        </div>
-    </div>
+                    <!-- Card Jadwal untuk Hari Selasa -->
+                    <div class="card">
+                        <div class="card-content">
+                            <h3>Selasa</h3><br>
+                            <% for(var i=0; i < dataSelasa.length; i++) { %>
+                                <a href="/siswa/detail/<%= dataSelasa[i].id %>">
+                                    <h4>
+                                        <%= dataSelasa[i].nama_mapel %>
+                                    </h4>
+                                    <p>
+                                        <%= dataSelasa[i].nama %>
+                                    </p>
+                                    <p>
+                                        <%= dataSelasa[i].jam_awal %> - <%= dataSelasa[i].jam_akhir %>
+                                    </p><br>
+                                </a>
+                                <% } %>
+                        </div>
+                    </div>
+                        <!-- Card Jadwal untuk Hari Rabu -->
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Rabu</h3><br>
+                                <% for(var i=0; i < dataRabu.length; i++) { %>
+                                    <a href="/siswa/detail/<%= dataRabu[i].id %>">
+                                        <h4>
+                                            <%= dataRabu[i].nama_mapel %>
+                                        </h4>
+                                        <p>
+                                            <%= dataRabu[i].nama %>
+                                        </p>
+                                        <p>
+                                            <%= dataRabu[i].jam_awal %> - <%= dataRabu[i].jam_akhir %>
+                                        </p><br>
+                                    </a>
+                                    <% } %>
+                            </div>
+                        </div>
 
-    <!-- Card Jadwal untuk Hari Rabu -->
-    <div class="card">
-        <div class="card-content">
-            <h3>Rabu</h3><br>
-            <% for(var i = 0; i < dataRabu.length; i++) { %>
-                <a href="/siswa/detail/<%= dataRabu[i].id %>">
-                    <h4><%= dataRabu[i].nama_mapel %></h4>
-                    <p><%= dataRabu[i].nama %></p>
-                    <p><%= dataRabu[i].jam_awal %> - <%= dataRabu[i].jam_akhir %></p><br>
-                </a>
-            <% } %>
-        </div>
-    </div>
+                        <!-- Card Jadwal untuk Hari Kamis -->
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Kamis</h3><br>
+                                <% for(var i=0; i < dataKamis.length; i++) { %>
+                                    <a href="/siswa/detail/<%= dataKamis[i].id %>">
+                                        <h4>
+                                            <%= dataKamis[i].nama_mapel %>
+                                        </h4>
+                                        <p>
+                                            <%= dataKamis[i].nama %>
+                                        </p>
+                                        <p>
+                                            <%= dataKamis[i].jam_awal %> - <%= dataKamis[i].jam_akhir %>
+                                        </p><br>
+                                    </a>
+                                    <% } %>
+                            </div>
+                        </div>
 
-    <!-- Card Jadwal untuk Hari Kamis -->
-    <div class="card">
-        <div class="card-content">
-            <h3>Kamis</h3><br>
-            <% for(var i = 0; i < dataKamis.length; i++) { %>
-                <a href="/siswa/detail/<%= dataKamis[i].id %>">
-                    <h4><%= dataKamis[i].nama_mapel %></h4>
-                    <p><%= dataKamis[i].nama %></p>
-                    <p><%= dataKamis[i].jam_awal %> - <%= dataKamis[i].jam_akhir %></p><br>
-                </a>
-            <% } %>
-        </div>
-    </div>
+                        <!-- Card Jadwal untuk Hari Jumat -->
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Jumat</h3><br>
+                                <% for(var i=0; i < dataJumat.length; i++) { %>
+                                    <a href="/siswa/detail/<%= dataJumat[i].id %>">
+                                        <h4>
+                                            <%= dataJumat[i].nama_mapel %>
+                                        </h4>
+                                        <p>
+                                            <%= dataJumat[i].nama %>
+                                        </p>
+                                        <p>
+                                            <%= dataJumat[i].jam_awal %> - <%= dataJumat[i].jam_akhir %>
+                                        </p><br>
+                                    </a>
+                                    <% } %>
+                            </div>
+                        </div>
 
-    <!-- Card Jadwal untuk Hari Jumat -->
-    <div class="card">
-        <div class="card-content">
-            <h3>Jumat</h3><br>
-            <% for(var i = 0; i < dataJumat.length; i++) { %>
-                <a href="/siswa/detail/<%= dataJumat[i].id %>">
-                    <h4><%= dataJumat[i].nama_mapel %></h4>
-                    <p><%= dataJumat[i].nama %></p>
-                    <p><%= dataJumat[i].jam_awal %> - <%= dataJumat[i].jam_akhir %></p><br>
-                </a>
-            <% } %>
-        </div>
-    </div>
+                        <!-- Card Jadwal untuk Hari Sabtu -->
+                        <div class="card">
+                            <div class="card-content">
+                                <h3>Sabtu</h3><br>
+                                <% for(var i=0; i < dataSabtu.length; i++) { %>
+                                    <a href="/siswa/detail/<%= dataSabtu[i].id %>">
+                                        <h4>
+                                            <%= dataSabtu[i].nama_mapel %>
+                                        </h4>
+                                        <p>
+                                            <%= dataSabtu[i].nama %>
+                                        </p>
+                                        <p>
+                                            <%= dataSabtu[i].jam_awal %> - <%= dataSabtu[i].jam_akhir %>
+                                        </p><br>
+                                    </a>
+                                    <% } %>
+                            </div>
+                        </div>
+                </div>
 
-    <!-- Card Jadwal untuk Hari Sabtu -->
-    <div class="card">
-        <div class="card-content">
-            <h3>Sabtu</h3><br>
-            <% for(var i = 0; i < dataSabtu.length; i++) { %>
-                <a href="/siswa/detail/<%= dataSabtu[i].id %>">
-                    <h4><%= dataSabtu[i].nama_mapel %></h4>
-                    <p><%= dataSabtu[i].nama %></p>
-                    <p><%= dataSabtu[i].jam_awal %> - <%= dataSabtu[i].jam_akhir %></p><br>
-                </a>
-            <% } %>
-        </div>
-    </div>
-</div>
-
-<%- include('../partials/footer') %>
+                <%- include('../partials/footer') %>

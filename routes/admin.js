@@ -48,7 +48,6 @@ router.get("/", async (req, res) => {
         res.redirect("/logout");
       } else {
         res.render("admin/dashboard", {
-          pages: "dashboard",
           dataSenin: data_harisenin,
           dataSelasa: data_hariselasa,
           dataRabu: data_harirabu,

@@ -13,12 +13,14 @@ router.get('/', async function(req, res, next) {
   let id = req.session.userId
   try {
     let data_user = await siswa_model.getByID(id)
+    let user_list = await siswa_model.getAll()
     let data_harisenin = await jadwal_model.getAllByHariSenin()
     let data_hariselasa = await jadwal_model.getAllByHariSelasa()
     let data_harirabu = await jadwal_model.getAllByHariRabu()
     let data_harikamis = await jadwal_model.getAllByHariKamis()
     let data_harijumat = await jadwal_model.getAllByHariJumat()
     let data_harisabtu = await jadwal_model.getAllByHariSabtu()
+    let activeUsers = user_list.filter(user => user.active);
     
     if (data_user.length > 0) {
       if (data_user[0].level_user != 'siswa') {
@@ -27,6 +29,7 @@ router.get('/', async function(req, res, next) {
         res.render('siswa/dashboard', {
           pages: 'dashboard',
           dataSenin: data_harisenin,
+          user_list: user_list,
           dataSelasa: data_hariselasa,
           dataRabu: data_harirabu,
           dataKamis: data_harikamis,
@@ -35,7 +38,8 @@ router.get('/', async function(req, res, next) {
           nama: data_user[0].nama,
           level_user: data_user[0].level_user,
           photos: data_user[0].photos,
-          email: data_user[0].email
+          email: data_user[0].email,
+          activeUsers: activeUsers
         })
       }
     } else {

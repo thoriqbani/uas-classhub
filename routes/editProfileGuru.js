@@ -32,7 +32,7 @@ router.get('/', async function (req, res, next) {
         res.redirect('/logout')
       } else {
         res.render('guru/editProfile', {
-          pages: 'profile',
+          
           nama: data_user[0].nama,
           jenis_kelamin: data_user[0].jenis_kelamin,
           tanggal_lahir: data_user[0].tanggal_lahir,

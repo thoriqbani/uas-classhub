@@ -34,7 +34,6 @@ router.get("/", async function (req, res, next) {
         res.redirect("/logout");
       } else {
         res.render("guru/create_materi", {
-          pages: "materi",
           dataMapel: dataMapel,
           nama: data_user[0].nama,
           level_user: data_user[0].level_user,

@@ -51,7 +51,7 @@ router.get('/create/:tugas_id', async function(req, res, next) {
     let id = req.session.userId
     try {
       let data_user = await siswa_model.getByID(id)
-      let data_tugas = await tugas_model.getByTugasId(tugas_id)
+      let data_tugas = await tugas_model.getByTugasID(tugas_id)
       
       if (data_user.length > 0) {
         if (data_user[0].level_user != 'siswa') {
@@ -81,7 +81,7 @@ router.get('/edit/:tugas_id', async function(req, res, next) {
     let id = req.session.userId
     try {
       let data_user = await siswa_model.getByID(id)
-      let data_tugas = await tugas_model.getByTugasId(tugas_id)
+      let data_tugas = await tugas_model.getByTugasID(tugas_id)
       
       if (data_user.length > 0) {
         if (data_user[0].level_user != 'siswa') {

@@ -35,7 +35,6 @@ router.get('/', async (req, res) => {
                 res.redirect('/logout');
             } else {
                 res.render('guru/dashboard', {
-                    pages: 'dashboard',
                     tugasList: tugasList,
                     materiList: materiList,
                     nama: data_user[0].nama,

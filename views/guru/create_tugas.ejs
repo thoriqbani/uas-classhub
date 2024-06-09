@@ -1,36 +1,35 @@
 <%- include('../partials/header') %>
-    <%- include('../partials/navbarGuru') %>
-        <%- include('../partials/message') %>
+  <%- include('../partials/navbarGuru', {pages: "tugas" , }) %>
+    <%- include('../partials/message') %>
 
-            <style>
-                .kebawah {
-                    margin-top: 260px;
-                }
-            </style>
-            
-            <div class="kebawah container">
-                <div class="row mt-lg-n15 mt-md-n11 mt-n10">
-                    <div class="col-xl-5 col-lg-6 col-md-8 mx-auto">
-                        <div class="card z-index-0">
-                            <div class="card-header text-center pt-4">
-                                <h5>Tambah Tugas</h5>
-                            </div>
-                            <div class="card-body">
-                                <form role="form text-left" action="/guru/tugas/create" method="post"
-                                    enctype="multipart/form-data">
-                                    <div class="row mb-3">
-                                        <div class="col-sm-4">
-                                          <h6 class="mb-0">Judul</h6>
-                                        </div>
-                                        <div class="col-sm-8">
-                                          <input type="text" id="judul" name="judul" class="form-control" required>
-                                        </div>
-                                      </div>
+      <style>
+        .kebawah {
+          margin-top: 260px;
+        }
+      </style>
 
-                                    <input type="text" class="form-control" id="mapel_id" name="mapel_id"
-                                        value="<%= dataMapel[0].mapel_id %>" hidden>
+      <div class="kebawah container">
+        <div class="row mt-lg-n15 mt-md-n11 mt-n10">
+          <div class="col-xl-5 col-lg-6 col-md-8 mx-auto">
+            <div class="card z-index-0">
+              <div class="card-header text-center pt-4">
+                <h5>Tambah Tugas</h5>
+              </div>
+              <div class="card-body">
+                <form role="form text-left" action="/guru/tugas/create" method="post" enctype="multipart/form-data">
+                  <div class="row mb-3">
+                    <div class="col-sm-4">
+                      <h6 class="mb-0">Judul</h6>
+                    </div>
+                    <div class="col-sm-8">
+                      <input type="text" id="judul" name="judul" class="form-control" required>
+                    </div>
+                  </div>
 
-                                    <div class="row mb-3">
+                  <input type="text" class="form-control" id="mapel_id" name="mapel_id"
+                    value="<%= dataMapel[0].mapel_id %>" hidden>
+
+                  <div class="row mb-3">
                     <div class="col-sm-4">
                       <h6 class="mb-0">Deskripsi</h6>
                     </div>
@@ -39,7 +38,7 @@
                     </div>
                   </div>
 
-                                    <div class="row mb-3">
+                  <div class="row mb-3">
                     <div class="col-sm-4">
                       <h6 class="mb-0">File</h6>
                     </div>
@@ -47,7 +46,6 @@
                       <input type="file" id="file_tugas" name="file_tugas" class="form-control" required>
                     </div>
                   </div>
-
                   <div class="row mb-3">
                     <div class="col-sm-4">
                       <h6 class="mb-0">Tanggal Deadline</h6>
@@ -64,15 +62,14 @@
                       <input type="time" id="waktu_deadline" name="waktu_deadline" class="form-control" required>
                     </div>
                   </div>
-                                    <div class="text-center">
-                                        <button type="submit"
-                                            class="btn bg-gradient-primary w-100 my-4 mb-2">Tambah</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                  <div class="text-center">
+                    <button type="submit" class="btn bg-gradient-primary w-100 my-4 mb-2">Tambah</button>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-<%- include('../partials/footer') %>
+      <%- include('../partials/footer') %>
