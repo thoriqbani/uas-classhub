@@ -28,8 +28,8 @@ router.get('/', async function(req, res, next) {
       } else {
         res.render('siswa/dashboard', {
           pages: 'dashboard',
-          dataSenin: data_harisenin,
           user_list: user_list,
+          dataSenin: data_harisenin,
           dataSelasa: data_hariselasa,
           dataRabu: data_harirabu,
           dataKamis: data_harikamis,

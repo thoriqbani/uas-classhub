@@ -75,6 +75,18 @@ class siswa_model {
         })
     }
 
+    static async getByLevelUser() {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT * FROM user WHERE level_user = "siswa"', function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
+    }
+
     static async Update(id, Data){
         return new Promise((resolve, reject) => {
         connect.query('update user set ? where id = ?', [Data, id], function(err, result){

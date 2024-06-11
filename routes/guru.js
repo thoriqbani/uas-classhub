@@ -28,6 +28,12 @@ router.get('/', async (req, res) => {
         let data_user = await guru_model.getByID(userId);
         let tugasList = await tugas_model.getAllByUserId(userId);
         let materiList = await materi_model.getAllByUserId(userId);
+        let data_harisenin = await jadwal_model.getByHariSenin(userId)
+        let data_hariselasa = await jadwal_model.getByHariSelasa(userId)
+        let data_harirabu = await jadwal_model.getByHariRabu(userId)
+        let data_harikamis = await jadwal_model.getByHariKamis(userId)
+        let data_harijumat = await jadwal_model.getByHariJumat(userId)
+        let data_harisabtu = await jadwal_model.getByHariSabtu(userId)
         // const tanggal = tugasList.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
         if (data_user.length > 0) {
@@ -40,6 +46,12 @@ router.get('/', async (req, res) => {
                     nama: data_user[0].nama,
                     level_user: data_user[0].level_user,
                     photos: data_user[0].photos,
+                    dataSenin: data_harisenin,
+                    dataSelasa: data_hariselasa,
+                    dataRabu: data_harirabu,
+                    dataKamis: data_harikamis,
+                    dataJumat: data_harijumat,
+                    dataSabtu: data_harisabtu,
                     email: data_user[0].email
                 });
             }

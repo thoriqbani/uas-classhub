@@ -50,6 +50,18 @@ class guru_model {
         })
     }
 
+    static async getByLevelUser() {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT * FROM user WHERE level_user = "guru"', function(err, rows) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            })
+        })
+    }
+
     static async getByEmail(email) {
         return new Promise((resolve, reject) => {
             connect.query('SELECT * FROM user WHERE email = ?', email, function(err, rows) {

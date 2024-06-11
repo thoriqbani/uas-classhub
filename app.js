@@ -22,6 +22,8 @@ var editProfileGuruRouter = require('./routes/editProfileGuru');
 var adminRouter = require('./routes/admin');
 var adminJadwalRouter = require('./routes/jadwal_Admin');
 var adminPelajaranRouter = require('./routes/pelajaranAdmin');
+var adminEditProfileRouter = require('./routes/editProfileAdmin');
+var adminLihatUserRouter = require('./routes/lihatUser');
 
 // Inisialisasi aplikasi Express
 var app = express();
@@ -71,6 +73,8 @@ app.use('/siswa/editProfile', editProfileSiswaRouter);
 app.use('/admin', adminRouter);
 app.use('/admin/jadwal', adminJadwalRouter);
 app.use('/admin/pelajaran', adminPelajaranRouter);
+app.use('/admin/editProfile', adminEditProfileRouter);
+app.use('/admin/lihatUser', adminLihatUserRouter);
 
 // Menambahkan rute create_jadwal
 

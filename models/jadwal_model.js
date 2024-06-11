@@ -73,9 +73,33 @@ class jadwal_model {
         });
     }
 
+    static async getByHariSenin(userId) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "senin" and jadwal.user_id = ? order by jam_awal asc', userId,(err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     static async getAllByHariSelasa() {
         return new Promise((resolve, reject) => {
             connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "selasa" order by jam_awal asc', (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
+    static async getByHariSelasa(userId) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "selasa" and jadwal.user_id = ? order by jam_awal asc', userId,(err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -97,9 +121,33 @@ class jadwal_model {
         });
     }
 
+    static async getByHariRabu(userId) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "rabu" and jadwal.user_id = ? order by jam_awal asc', userId,(err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     static async getAllByHariKamis() {
         return new Promise((resolve, reject) => {
             connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "kamis" order by jam_awal asc', (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
+    static async getByHariKamis(userId) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "kamis" and jadwal.user_id = ? order by jam_awal asc', userId,(err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -121,9 +169,33 @@ class jadwal_model {
         });
     }
 
+    static async getByHariJumat(userId) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "jumat" and jadwal.user_id = ? order by jam_awal asc', userId,(err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     static async getAllByHariSabtu() {
         return new Promise((resolve, reject) => {
             connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "sabtu" order by jam_awal asc', (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
+    static async getByHariSabtu(userId) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE hari = "sabtu" and jadwal.user_id = ? order by jam_awal asc', userId,(err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
