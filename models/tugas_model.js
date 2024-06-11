@@ -27,7 +27,7 @@ class tugas_model {
 
     static async getByTugasID(tugas_id) {
         return new Promise((resolve, reject) => {
-            connect.query('SELECT * FROM tugas WHERE tugas.id = ? ORDER BY id DESC', [tugas_id], (err, rows) => {
+            connect.query('SELECT DATE_FORMAT(tanggal_deadline, "%Y-%m-%d") AS tanggal_deadline, waktu_deadline, judul, deskripsi, file_tugas, tugas.id, mapel_id FROM tugas WHERE tugas.id = ? ORDER BY id DESC', [tugas_id], (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
