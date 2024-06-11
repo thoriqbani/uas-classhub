@@ -44,23 +44,38 @@ router.get('/', async (req, res) => {
 router.post('/create', async (req, res) => {
     try {
         const { hari, jam_awal, jam_akhir, user_id, mapel_id } = req.body;
-        
-        const data = {
-            hari,
-            jam_awal,
-            jam_akhir,
-            user_id,
-            mapel_id
-        };
-        console.log(data)
-        await jadwal_model.store(data);
-        req.flash('success','Create Jadwal Berhasil !!')
-        res.redirect('/admin/jadwal');
+        let existingJadwal = await jadwal_model.getAll();
+
+        // Check if there's a conflict in the schedule
+        const isConflict = existingJadwal.some(jadwal => {
+            return (
+                (jam_awal >= jadwal.jam_awal && jam_awal < jadwal.jam_akhir) ||
+                (jam_akhir > jadwal.jam_awal && jam_akhir <= jadwal.jam_akhir) ||
+                (jadwal.jam_awal >= jam_awal && jadwal.jam_awal < jam_akhir) ||
+                (jadwal.jam_akhir > jam_awal && jadwal.jam_akhir <= jam_akhir)
+            );
+        });
+
+        if (isConflict) {
+            req.flash('messageError', 'Jadwal bertabrakan dengan jadwal lain pada hari yang sama.');
+            res.redirect('/admin/jadwal');
+        } else {
+            const data = {
+                hari,
+                jam_awal,
+                jam_akhir,
+                user_id,
+                mapel_id
+            };
+            await jadwal_model.store(data);
+            req.flash('success', 'Create Jadwal Berhasil !!');
+            res.redirect('/admin/jadwal');
+        }
     } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
-})
+});
 
 // UPDATE: Update an existing jadwal
 router.put('/:id', async (req, res) => {
