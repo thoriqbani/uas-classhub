@@ -38,7 +38,6 @@ router.get("/", async (req, res) => {
     let data_siswa = await siswa_model.getByLevelUser();
     let tugasList = await tugas_model.getAllByUserId(userId);
     let materiList = await materi_model.getAllByUserId(userId);
-    // const tanggal = tugasList.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 
     if (data_user.length > 0) {
       if (data_user[0].level_user != "admin") {
@@ -73,12 +72,6 @@ router.get("/detail/(:jadwalId)", async function (req, res, next) {
     let user_list = await guru_model.getAll();
     let pelajaran_list = await pelajaran_model.getAll();
     let tugas_list = await tugas_model.getAllByUserId(id)
-    // let dataPresensi = await presensi_model.getPresensiByPresensiAndUserId(
-    //   data_mapel[0].mapel_id,
-    //   id
-    // );
-
-    // let dataPresensi = await presensi_model.getPresensiByPresensiId(id)
     let today = new Date();
     let hours = today.getHours();
     let minutes = today.getMinutes();
@@ -153,4 +146,70 @@ router.post("/delete/(:userID)", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+router.post('/register', upload.single("photos"), async function(req, res) {
+  let { nama, jenis_kelamin, tanggal_lahir, no_hp, email, password, confirmPassword, level_user } = req.body;
+  try {
+    let today = new Date();
+    let birthDate = new Date(tanggal_lahir);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    if (age < 12) {
+      req.flash('messageError', ' Umur harus 12 tahun keatas !!');
+      return res.redirect('/register');
+    }
+
+    let cekEmailSiswa = await siswa_model.getByEmail(email)
+
+    if(cekEmailSiswa.length > 0) {
+      req.flash('messageError', 'Email sudah ada !!');
+      return res.redirect('/register');
+    }
+    
+    if (password.length < 8) {
+      req.flash('messageError', ' Password harus terdiri dari minimal 8 karakter !!');
+      return res.redirect('/register');
+    }
+
+    if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)) {
+      req.flash('messageError', ' Password harus terdiri dari angka dan huruf saja !!');
+      return res.redirect('/register');
+    }
+    
+    if (password !== confirmPassword) {
+      req.flash('messageError', ' Konfirmasi password tidak cocok !!');
+      return res.redirect('/register');
+    }
+    
+    let enskripsi = await bcrypt.hash(password, 10);
+    let data = {
+      nama,
+      jenis_kelamin,
+      tanggal_lahir,
+      no_hp,
+      photos: req.file.filename,
+      email,
+      password: enskripsi,
+      level_user: level_user
+    }
+
+    let cek = siswa_model.Store(data);
+    if (cek) {
+      req.flash('success', 'Berhasil menyimpan !!');
+      res.redirect('/admin/lihatUser');
+    } else {
+      req.flash('error', 'Gagal menyimpan !!');
+      res.redirect('/admin/lihatUser');
+    }
+  } catch (error) {
+    console.error(error)
+    req.flash('error', 'Error pada fungsi !!')
+    res.redirect('/admin/lihatUser')
+  }
+});
+
 module.exports = router;

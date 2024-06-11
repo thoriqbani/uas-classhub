@@ -13,6 +13,18 @@ class jadwal_model {
         });
     }
 
+    static async getByHari(hari) {
+        return new Promise((resolve, reject) => {
+            connect.query('SELECT * FROM jadwal where hari = ?', hari, (err, rows) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(rows);
+                }
+            });
+        });
+    }
+
     static async getById(id) {
         return new Promise((resolve, reject) => {
             connect.query('SELECT jadwal.id, nama_mapel, hari, jam_awal, jam_akhir, user.nama, jadwal.mapel_id FROM jadwal JOIN user ON jadwal.user_id = user.id JOIN pelajaran ON jadwal.mapel_id = pelajaran.id WHERE jadwal.id = ?', [id], (err, rows) => {

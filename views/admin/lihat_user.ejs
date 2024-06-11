@@ -1,142 +1,255 @@
 <%- include('../partials/header') %>
-<%- include('../partials/navbarAdmin', {pages: "lihat_user" ,}) %>
-<%- include('../partials/message') %>
-
-<div class="container">
-    <div class="row mt-3">
-        <div class="col-lg-6">
-            <div class="card kanan " style="border:1px dotted grey;">
-                <div class="card-header text-center pt-4">
-                    <h5>Guru</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Guru</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body-guru">
-                                <% for (let i = 0; i < data_guru.length; i++) { %>
-                                <tr class="table-row">
-                                    <td><%= (i + 1) %></td>
-                                    <td><%= data_guru[i].nama %></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-link dropdown-toggle" type="button"
-                                                id="dropdownMenuButtonGuru<%= i %>" data-bs-toggle="dropdown"
-                                                aria-expanded="false"></button>
-                                            <ul class="dropdown-menu"
-                                                aria-labelledby="dropdownMenuButtonGuru<%= i %>">
-                                                <li>
-                                                    <form action="/admin/lihatUser/delete/<%= data_guru[i].id %>"
-                                                        method="post">
-                                                        <button type="submit" class="dropdown-item">Delete</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button id="toggle-table-guru" class="btn btn-transparent">Selengkapnya</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-lg-6">
-            <div class="card kanan " style="border:1px dotted grey;">
-                <div class="card-header text-center pt-4">
-                    <h5>Siswa</h5>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Siswa</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="table-body-siswa">
-                                <% for (let i = 0; i < data_siswa.length; i++) { %>
-                                <tr class="table-row">
-                                    <td><%= (i + 1) %></td>
-                                    <td><%= data_siswa[i].nama %></td>
-                                    <td>
-                                        <div class="dropdown">
-                                            <button class="btn btn-link dropdown-toggle" type="button"
-                                                id="dropdownMenuButtonSiswa<%= i %>" data-bs-toggle="dropdown"
-                                                aria-expanded="false"></button>
-                                            <ul class="dropdown-menu"
-                                                aria-labelledby="dropdownMenuButtonSiswa<%= i %>">
-                                                <li>
-                                                    <form action="/admin/lihatUser/delete/<%= data_siswa[i].id %>"
-                                                        method="post">
-                                                        <button type="submit" class="dropdown-item">Delete</button>
-                                                    </form>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <% } %>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-center mt-3">
-                        <button id="toggle-table-siswa" class="btn btn-transparent">Selengkapnya</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const guruRows = document.querySelectorAll('#table-body-guru .table-row');
-        const siswaRows = document.querySelectorAll('#table-body-siswa .table-row');
-        const toggleGuruBtn = document.getElementById('toggle-table-guru');
-        const toggleSiswaBtn = document.getElementById('toggle-table-siswa');
-
-        let isGuruExpanded = false;
-        let isSiswaExpanded = false;
-        const visibleRows = 4;
-
-        function updateTable(rows, isExpanded, toggleBtn) {
-            rows.forEach((row, index) => {
-                if (isExpanded || index < visibleRows) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
+    <%- include('../partials/navbarAdmin', {pages: "lihat_user" ,}) %>
+        <%- include('../partials/message') %>
+            <style>
+                .kebawah {
+                    margin-top: 250px;
                 }
-            });
+            </style>
+            <div class="content-wrapper">
+                <div class="container-xxl flex-grow-1 container-p-y">
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Tambah User</h4>
+                    <div class="container kebawah">
+                        <div class="row mt-lg-n15 mt-md-n11 mt-n10">
+                            <div class="col-xl-4 col-lg-5 col-md-7 mx-auto">
+                                <div class="card z-index-0">
+                                    <div class="card-header text-center pt-4">
+                                        <h5>Registrasi</h5>
+                                    </div>
 
-            toggleBtn.textContent = isExpanded ? 'Tutup' : 'Selengkapnya';
-        }
+                                    <div class="card-body">
+                                        <form role="form text-left" action="/admin/lihatUser/register" method="POST"
+                                            enctype="multipart/form-data">
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" id="nama" name="nama"
+                                                    placeholder="Name" aria-label="Name" aria-describedby="email-addon">
+                                            </div>
+                                            <div class="mb-3">
+                                                <select class="form-control" id="jenis_kelamin" name="jenis_kelamin"
+                                                    aria-label="Gender">
+                                                    <option selected disabled>Select Gender</option>
+                                                    <option value="laki-laki">Male</option>
+                                                    <option value="perempuan">Female</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="date" class="form-control" id="tanggal_lahir"
+                                                    name="tanggal_lahir" placeholder="Tanggal Lahir"
+                                                    aria-label="Tanggal Lahir" aria-describedby="email-addon">
+                                            </div>
 
-        toggleGuruBtn.addEventListener('click', () => {
-            isGuruExpanded = !isGuruExpanded;
-            updateTable(guruRows, isGuruExpanded, toggleGuruBtn);
-        });
+                                            <div class="mb-3">
+                                                <input type="text" class="form-control" id="no_hp" name="no_hp"
+                                                    placeholder="No. HP" aria-label="No. HP"
+                                                    aria-describedby="email-addon">
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="file" class="form-control" id="photos" name="photos"
+                                                    placeholder="Photos" aria-label="Photos"
+                                                    aria-describedby="email-addon">
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                    placeholder="Email" aria-label="Email"
+                                                    aria-describedby="email-addon">
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="password" class="form-control" id="password"
+                                                    name="password" placeholder="Password" aria-label="Password"
+                                                    aria-describedby="password-addon">
+                                            </div>
+                                            <div class="mb-3">
+                                                <input type="password" class="form-control" id="confirmPassword"
+                                                    name="confirmPassword" placeholder="Confirm Password"
+                                                    aria-label="password" aria-describedby="password-addon">
+                                            </div>
+                                            <div class="mb-3">
+                                                <select name="level_user" id="">
+                                                    <option selected disabled>---Pilih Level---</option>
+                                                    <option value="siswa">Siswa</option>
+                                                    <option value="guru">Guru</option>
+                                                </select>
+                                            </div>
+                                            <div class="text-center">
+                                                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign
+                                                    up</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-        toggleSiswaBtn.addEventListener('click', () => {
-            isSiswaExpanded = !isSiswaExpanded;
-            updateTable(siswaRows, isSiswaExpanded, toggleSiswaBtn);
-        });
 
-        updateTable(guruRows, isGuruExpanded, toggleGuruBtn);
-        updateTable(siswaRows, isSiswaExpanded, toggleSiswaBtn);
-    });
-</script>
-<%- include('../partials/footer') %>
+                    <div class="container mb-4">
+                        <h4 class="fw-bold py-3 mb-4">Lihat User</h4>
+                        <div class="row mt-3">
+                            <div class="col-lg-6">
+                                <div class="card kanan " style="border:1px dotted grey;">
+                                    <div class="card-header text-center pt-4">
+                                        <h5>Guru</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Guru</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-body-guru">
+                                                    <% for (let i=0; i < data_guru.length; i++) { %>
+                                                        <tr class="table-row">
+                                                            <td>
+                                                                <%= (i + 1) %>
+                                                            </td>
+                                                            <td>
+                                                                <%= data_guru[i].nama %>
+                                                            </td>
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-link dropdown-toggle"
+                                                                        type="button"
+                                                                        id="dropdownMenuButtonGuru<%= i %>"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"></button>
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="dropdownMenuButtonGuru<%= i %>">
+                                                                        <li>
+                                                                            <form
+                                                                                action="/admin/lihatUser/update/<%= data_guru[i].id %>"
+                                                                                method="post">
+                                                                                <button type="submit"
+                                                                                    class="dropdown-item">Update</button>
+                                                                            </form>
+                                                                            <form
+                                                                                action="/admin/lihatUser/delete/<%= data_guru[i].id %>"
+                                                                                method="post">
+                                                                                <button type="submit"
+                                                                                    class="dropdown-item">Delete</button>
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <button id="toggle-table-guru"
+                                                class="btn btn-transparent">Selengkapnya</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6">
+                                <div class="card kanan " style="border:1px dotted grey;">
+                                    <div class="card-header text-center pt-4">
+                                        <h5>Siswa</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Siswa</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="table-body-siswa">
+                                                    <% for (let i=0; i < data_siswa.length; i++) { %>
+                                                        <tr class="table-row">
+                                                            <td>
+                                                                <%= (i + 1) %>
+                                                            </td>
+                                                            <td>
+                                                                <%= data_siswa[i].nama %>
+                                                            </td>
+                                                            <td>
+                                                                <div class="dropdown">
+                                                                    <button class="btn btn-link dropdown-toggle"
+                                                                        type="button"
+                                                                        id="dropdownMenuButtonSiswa<%= i %>"
+                                                                        data-bs-toggle="dropdown"
+                                                                        aria-expanded="false"></button>
+                                                                    <ul class="dropdown-menu"
+                                                                        aria-labelledby="dropdownMenuButtonSiswa<%= i %>">
+                                                                        <li>
+                                                                            <form
+                                                                                action="/admin/lihatUser/update/<%= data_siswa[i].id %>"
+                                                                                method="post">
+                                                                                <button type="submit"
+                                                                                    class="dropdown-item">Delete</button>
+                                                                            </form>
+                                                                            <form
+                                                                                action="/admin/lihatUser/delete/<%= data_siswa[i].id %>"
+                                                                                method="post">
+                                                                                <button type="submit"
+                                                                                    class="dropdown-item">Delete</button>
+                                                                            </form>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <% } %>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="text-center mt-3">
+                                            <button id="toggle-table-siswa"
+                                                class="btn btn-transparent">Selengkapnya</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    const guruRows = document.querySelectorAll('#table-body-guru .table-row');
+                    const siswaRows = document.querySelectorAll('#table-body-siswa .table-row');
+                    const toggleGuruBtn = document.getElementById('toggle-table-guru');
+                    const toggleSiswaBtn = document.getElementById('toggle-table-siswa');
+
+                    let isGuruExpanded = false;
+                    let isSiswaExpanded = false;
+                    const visibleRows = 4;
+
+                    function updateTable(rows, isExpanded, toggleBtn) {
+                        rows.forEach((row, index) => {
+                            if (isExpanded || index < visibleRows) {
+                                row.style.display = '';
+                            } else {
+                                row.style.display = 'none';
+                            }
+                        });
+
+                        toggleBtn.textContent = isExpanded ? 'Tutup' : 'Selengkapnya';
+                    }
+
+                    toggleGuruBtn.addEventListener('click', () => {
+                        isGuruExpanded = !isGuruExpanded;
+                        updateTable(guruRows, isGuruExpanded, toggleGuruBtn);
+                    });
+
+                    toggleSiswaBtn.addEventListener('click', () => {
+                        isSiswaExpanded = !isSiswaExpanded;
+                        updateTable(siswaRows, isSiswaExpanded, toggleSiswaBtn);
+                    });
+
+                    updateTable(guruRows, isGuruExpanded, toggleGuruBtn);
+                    updateTable(siswaRows, isSiswaExpanded, toggleSiswaBtn);
+                });
+            </script>
+            <%- include('../partials/footer') %>

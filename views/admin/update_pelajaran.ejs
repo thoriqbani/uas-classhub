@@ -59,9 +59,20 @@
             font-size: 14px;
             color: #666;
         }
+
+        .kiri {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .kanan {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
     </style>
     <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
         id="sidenav-main">
+        <!-- Sidebar Start -->
         <div class="sidenav-header">
             <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
                 aria-hidden="true" id="iconSidenav"></i>
@@ -84,7 +95,7 @@
 
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="/guru">
+                <a class="nav-link" href="/admin">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1"
@@ -110,7 +121,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="/guru/materi">
+                <a class="nav-link  " href="/admin/jadwal">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -121,11 +132,11 @@
                                 d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Materi</span>
+                    <span class="nav-link-text ms-1">Jadwal</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  " href="/guru/tugas">
+                <a class="nav-link  " href="/admin/pelajaran">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -138,7 +149,24 @@
                                 d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Tugas</span>
+                    <span class="nav-link-text ms-1">Pelajaran</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link  " href="/admin/lihatUser">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
+                            class="bi bi-journal-text" viewBox="0 0 16 16">
+                            <path
+                                d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5m0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5" />
+                            <path
+                                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2" />
+                            <path
+                                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z" />
+                        </svg>
+                    </div>
+                    <span class="nav-link-text ms-1">Lihat User</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -161,37 +189,68 @@
 
     </aside>
     <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg ">
-        <!-- Navbar -->
+        <!-- Navbar start -->
         <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none bg-secondary border-radius-xl"
             id="navbarBlur" navbar-scroll="true">
             <div class="container-fluid py-1 px-3">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-                        <li class="breadcrumb-item text-sm"><a class="warna-putih" href="javascript:;">Pages</a></li>
-                        <li class="breadcrumb-item text-sm text-dark active" aria-current="page">
-                            <%= pages %>
-                        </li>
-                    </ol>
-                    <h6 class="font-weight-bolder mb-0">
-                        <%= pages %>
-                    </h6>
-                </nav>
+
                 <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
                     <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-
+                        <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                                <div class="sidenav-toggler-inner">
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                    <i class="sidenav-toggler-line"></i>
+                                </div>
+                            </a>
+                        </li>
                     </div>
+                    <ul class="navbar-nav  justify-content-end">
+                        <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                            <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-person-lines-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5 6s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zM11 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5m.5 2.5a.5.5 0 0 0 0 1h4a.5.5 0 0 0 0-1zm2 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1zm0 3a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
+                                </svg>
+                            </a>
+                            <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4"
+                                aria-labelledby="dropdownMenuButton">
+                                <li class="mb-2">
+                                    <a class="dropdown-item border-radius-md" href="/siswa/editProfile">
+                                        <div class="d-flex flex-column align-items-center py-1">
+                                            <div class="my-auto">
+                                                <img src="/images/foto_user/<%= photos %>"
+                                                    class="avatar avatar-sm mb-3">
+
+                                            </div>
+                                            <div class="d-flex flex-column justify-content-center text-center">
+                                                <h6 class="text-sm font-weight-normal mb-1">
+                                                    <span class="font-weight-bold">
+                                                        <%= nama %>
+                                                    </span>
+                                                </h6>
+                                                <p class="text-xs text-secondary mb-0">
+                                                    <%= email %>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
         </nav>
         <!-- End Navbar -->
         <%- include('../partials/message') %>
             <div class="content-wrapper">
                 <!-- Content -->
                 <div class="container-fluid flex-grow-1 container-p-y">
-                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span>
-                        <%= pages %>
-                    </h4>
+                    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Forms /</span> Update Pelajaran</h4>
 
                     <div class="row">
                         <!-- Form Column -->
@@ -201,16 +260,18 @@
                                     <h5>Update Pelajaran</h5>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form text-left" action="/admin/pelajaran/update/<%= pelajaran_list[0].id %>" method="post">
+                                    <form role="form text-left"
+                                        action="/admin/pelajaran/update/<%= pelajaran_list[0].id %>" method="post">
                                         <div class="row mb-3">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-0">Mapel</h6>
                                             </div>
                                             <div class="col-sm-8 form-group">
-                                            <input type="text" class="form-control" name="nama_mapel"
-                                                placeholder="<%= pelajaran_list[0].nama_mapel %>" aria-label="nama_mapel">
+                                                <input type="text" class="form-control" name="nama_mapel"
+                                                    placeholder="<%= pelajaran_list[0].nama_mapel %>"
+                                                    aria-label="nama_mapel">
+                                            </div>
                                         </div>
-                                    </div>
                                         <div class="row mb-3">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-0">Guru</h6>

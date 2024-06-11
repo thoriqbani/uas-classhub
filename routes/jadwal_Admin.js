@@ -44,7 +44,7 @@ router.get('/', async (req, res) => {
 router.post('/create', async (req, res) => {
     try {
         const { hari, jam_awal, jam_akhir, user_id, mapel_id } = req.body;
-        let existingJadwal = await jadwal_model.getAll();
+        let existingJadwal = await jadwal_model.getByHari(hari);
 
         // Check if there's a conflict in the schedule
         const isConflict = existingJadwal.some(jadwal => {
