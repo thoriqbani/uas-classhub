@@ -63,44 +63,65 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/detail/(:jadwalId)", async function (req, res, next) {
-  let jadwalID = req.params.jadwalId;
-  let id = req.session.userId;
+router.get("/updateGuru/(:userID)", async function (req, res, next) {
+  let id = req.params.userID;
+  console.log(id)
+  let userId = req.session.userId;
+  console.log(userId)
   try {
-    let data_user = await admin_model.getByID(id);
-    let data_mapel = await jadwal_model.getById(jadwalID);
-    let user_list = await guru_model.getAll();
-    let pelajaran_list = await pelajaran_model.getAll();
-    let tugas_list = await tugas_model.getAllByUserId(id)
-    let today = new Date();
-    let hours = today.getHours();
-    let minutes = today.getMinutes();
-    const waktu =
-      (hours < 10 ? "0" : "") +
-      hours +
-      ":" +
-      (minutes < 10 ? "0" : "") +
-      minutes;
-
-    let hariini = getDayName(today.getDay());
-    console.log(hariini);
+    let data_user = await admin_model.getByID(userId); //buat admin
+    let user_list = await guru_model.getByID(id);
+    
     if (data_user.length > 0) {
       if (data_user[0].level_user != "admin") {
         res.redirect("/logout");
       } else {
-        res.render("admin/detail_jadwal", {
+        res.render("admin/update_userGuru", {
           pages: "detail",
-          //   dataPresensi: dataPresensi,
-          dataMapel: data_mapel,
-          hariIni: hariini,
-          user_list: user_list,
-          tugas_list: tugas_list,
-          pelajaran_list: pelajaran_list,
-          jamSekarang: waktu,
-          nama: data_user[0].nama,
-          photos: data_user[0].photos,
-          email: data_user[0].email,
-          level_user: data_user[0].level_user,
+          data_user: data_user,
+          id: id,
+          nama: user_list[0].nama,
+          jenis_kelamin: user_list[0].jenis_kelamin,
+          no_hp: user_list[0].no_hp,
+          tanggal_lahir: user_list[0].tanggal_lahir,
+          photos: user_list[0].photos,
+          email: user_list[0].email,
+          level_user: user_list[0].level_user,
+        });
+      }
+    } else {
+      res.status(401).json({ error: "user tidak ada" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(501).json("error pada fungsi");
+  }
+});
+
+router.get("/updateSiswa/(:userID)", async function (req, res, next) {
+  let id = req.params.userID;
+  console.log(id)
+  let userId = req.session.userId;
+  console.log(userId)
+  try {
+    let data_user = await admin_model.getByID(userId); //buat admin
+    let user_list = await guru_model.getByID(id);
+    
+    if (data_user.length > 0) {
+      if (data_user[0].level_user != "admin") {
+        res.redirect("/logout");
+      } else {
+        res.render("admin/update_userSiswa", {
+          pages: "detail",
+          data_user: data_user,
+          id: id,
+          nama: user_list[0].nama,
+          jenis_kelamin: user_list[0].jenis_kelamin,
+          no_hp: user_list[0].no_hp,
+          tanggal_lahir: user_list[0].tanggal_lahir,
+          photos: user_list[0].photos,
+          email: user_list[0].email,
+          level_user: user_list[0].level_user,
         });
       }
     } else {

@@ -1,5 +1,5 @@
 <%- include('../partials/header') %>
-    <%- include('../partials/navbarAdmin', {pages: "lihat_user" ,}) %>
+    <%- include('../partials/navbarAdmin', {pages: "lihat_user" }) %>
         <%- include('../partials/message') %>
             <style>
                 .kebawah {
@@ -16,7 +16,6 @@
                                     <div class="card-header text-center pt-4">
                                         <h5>Registrasi</h5>
                                     </div>
-
                                     <div class="card-body">
                                         <form role="form text-left" action="/admin/lihatUser/register" method="POST"
                                             enctype="multipart/form-data">
@@ -37,7 +36,6 @@
                                                     name="tanggal_lahir" placeholder="Tanggal Lahir"
                                                     aria-label="Tanggal Lahir" aria-describedby="email-addon">
                                             </div>
-
                                             <div class="mb-3">
                                                 <input type="text" class="form-control" id="no_hp" name="no_hp"
                                                     placeholder="No. HP" aria-label="No. HP"
@@ -80,8 +78,6 @@
                             </div>
                         </div>
                     </div>
-
-
                     <div class="container mb-4">
                         <h4 class="fw-bold py-3 mb-4">Lihat User</h4>
                         <div class="row mt-3">
@@ -119,12 +115,11 @@
                                                                     <ul class="dropdown-menu"
                                                                         aria-labelledby="dropdownMenuButtonGuru<%= i %>">
                                                                         <li>
-                                                                            <form
-                                                                                action="/admin/lihatUser/update/<%= data_guru[i].id %>"
-                                                                                method="post">
+                                                                            <a
+                                                                                href="/admin/lihatUser/updateGuru/<%= data_guru[i].id %>">
                                                                                 <button type="submit"
                                                                                     class="dropdown-item">Update</button>
-                                                                            </form>
+                                                                            </a>
                                                                             <form
                                                                                 action="/admin/lihatUser/delete/<%= data_guru[i].id %>"
                                                                                 method="post">
@@ -182,12 +177,10 @@
                                                                     <ul class="dropdown-menu"
                                                                         aria-labelledby="dropdownMenuButtonSiswa<%= i %>">
                                                                         <li>
-                                                                            <form
-                                                                                action="/admin/lihatUser/update/<%= data_siswa[i].id %>"
-                                                                                method="post">
+                                                                            <a href="/admin/lihatUser/updateSiswa/<%= data_siswa[i].id %>">
                                                                                 <button type="submit"
-                                                                                    class="dropdown-item">Delete</button>
-                                                                            </form>
+                                                                                    class="dropdown-item">Update</button>
+                                                                            </a>
                                                                             <form
                                                                                 action="/admin/lihatUser/delete/<%= data_siswa[i].id %>"
                                                                                 method="post">
