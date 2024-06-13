@@ -133,23 +133,103 @@ router.get("/updateSiswa/(:userID)", async function (req, res, next) {
   }
 });
 
-router.post("/detail/update/(:jadwalID)", async (req, res) => {
-  let { jadwalID } = req.params;
+router.post("/updateSiswa/(:userID)", upload.single("photos"), async (req, res) => {
+  let { userID } = req.params;
 
   try {
-    const { hari, jam_awal, jam_akhir, user_id, mapel_id } = req.body;
+    let { nama, jenis_kelamin, tanggal_lahir, no_hp, email } = req.body;
+    console.log(email)
+    console.log(userID)
+    let today = new Date();
+    let birthDate = new Date(tanggal_lahir);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    if (age < 12) {
+      req.flash('messageError', ' Umur harus 12 tahun keatas !!');
+      return res.redirect('/admin/lihatUser');
+    }
 
-    const data = {
-      hari,
-      jam_awal,
-      jam_akhir,
-      user_id,
-      mapel_id,
-    };
+    let cekEmailSiswa = await siswa_model.getByEmail(email)
 
-    await jadwal_model.update(data, jadwalID);
-    req.flash("success", "Update Jadwal Berhasil !!");
-    res.redirect("/admin");
+    if(cekEmailSiswa.length > 0) {
+      req.flash('messageError', 'Email sudah ada !!');
+      return res.redirect('/admin/lihatUser');
+    }
+    
+    let data = {
+      nama,
+      jenis_kelamin,
+      tanggal_lahir,
+      no_hp,
+      photos: req.file.filename,
+      email,
+
+      level_user: 'siswa'
+    }
+
+    let cek = siswa_model.Update(userID, data);
+    if (cek) {
+      req.flash('success', 'Berhasil menyimpan !!');
+      res.redirect('/admin/lihatUser');
+    } else {
+      req.flash('error', 'Gagal menyimpan !!');
+      res.redirect('/admin/lihatUser');
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.post("/updateGuru/(:userID)", upload.single("photos"), async (req, res) => {
+  let { userID } = req.params;
+
+  try {
+    let { nama, jenis_kelamin, tanggal_lahir, no_hp, email } = req.body;
+    console.log(email)
+    console.log(userID)
+    let today = new Date();
+    let birthDate = new Date(tanggal_lahir);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    let monthDiff = today.getMonth() - birthDate.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    
+    if (age < 12) {
+      req.flash('messageError', ' Umur harus 12 tahun keatas !!');
+      return res.redirect('/admin/lihatUser');
+    }
+
+    let cekEmailSiswa = await siswa_model.getByEmail(email)
+
+    if(cekEmailSiswa.length > 0) {
+      req.flash('messageError', 'Email sudah ada !!');
+      return res.redirect('/admin/lihatUser');
+    }
+    
+    let data = {
+      nama,
+      jenis_kelamin,
+      tanggal_lahir,
+      no_hp,
+      photos: req.file.filename,
+      email,
+      level_user: 'guru'
+    }
+
+    let cek = siswa_model.Update(userID, data);
+    if (cek) {
+      req.flash('success', 'Berhasil menyimpan !!');
+      res.redirect('/admin/lihatUser');
+    } else {
+      req.flash('error', 'Gagal menyimpan !!');
+      res.redirect('/admin/lihatUser');
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -181,29 +261,29 @@ router.post('/register', upload.single("photos"), async function(req, res) {
     
     if (age < 12) {
       req.flash('messageError', ' Umur harus 12 tahun keatas !!');
-      return res.redirect('/register');
+      return res.redirect('/admin/lihatUser');
     }
 
     let cekEmailSiswa = await siswa_model.getByEmail(email)
 
     if(cekEmailSiswa.length > 0) {
       req.flash('messageError', 'Email sudah ada !!');
-      return res.redirect('/register');
+      return res.redirect('/admin/lihatUser');
     }
     
     if (password.length < 8) {
       req.flash('messageError', ' Password harus terdiri dari minimal 8 karakter !!');
-      return res.redirect('/register');
+      return res.redirect('/admin/lihatUser');
     }
 
     if (!/^(?=.*[a-zA-Z])(?=.*[0-9])/.test(password)) {
       req.flash('messageError', ' Password harus terdiri dari angka dan huruf saja !!');
-      return res.redirect('/register');
+      return res.redirect('/admin/lihatUser');
     }
     
     if (password !== confirmPassword) {
       req.flash('messageError', ' Konfirmasi password tidak cocok !!');
-      return res.redirect('/register');
+      return res.redirect('/admin/lihatUser');
     }
     
     let enskripsi = await bcrypt.hash(password, 10);

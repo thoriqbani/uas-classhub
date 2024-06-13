@@ -77,18 +77,16 @@
                                             </thead>
                                             <tbody id="table-body">
                                                 <% for (let i=0; i < pelajaran_list.length; i++) { %>
-                                                    <% let currentPelajaran=pelajaran_list[i]; %>
-                                                        <% let correspondingUser=user_list.find(user=> user.id ===
-                                                            currentPelajaran.user_id); %>
+
                                                             <tr class="table-row">
                                                                 <td>
                                                                     <%= (i + 1) %>
                                                                 </td>
                                                                 <td>
-                                                                    <%= currentPelajaran.nama_mapel %>
+                                                                    <%= pelajaran_list[i].nama_mapel %>
                                                                 </td>
                                                                 <td>
-                                                                    <%= correspondingUser.nama %>
+                                                                    <%= pelajaran_list[i].nama %>
                                                                 </td>
                                                                 <td>
                                                                     <div class="dropdown">

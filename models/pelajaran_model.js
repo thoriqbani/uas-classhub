@@ -3,7 +3,7 @@ const connect = require('../config/db.js');
 class pelajaran_model {
     static async getAll() {
         return new Promise((resolve, reject) => {
-            connect.query('SELECT * FROM pelajaran ORDER BY id DESC', (err, rows) => {
+            connect.query('SELECT pelajaran.id, nama_mapel, user.nama, user_id FROM pelajaran JOIN user ON pelajaran.user_id = user.id ORDER BY id DESC', (err, rows) => {
                 if (err) {
                     reject(err);
                 } else {
